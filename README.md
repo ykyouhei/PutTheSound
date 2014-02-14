@@ -27,3 +27,6 @@ $ pod install
 
 あとは　_PutTheSound.xcworkspace_　をクリックしてプロジェクトを開くだけです。
 いつも使っている、*.xcodeproj　じゃないので注意
+
+#### 参考
+https://gist.github.com/STAR-ZERO/5001341
