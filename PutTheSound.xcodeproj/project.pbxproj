@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		410568E318AE7FC900CDBFEF /* StationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 410568E218AE7FC900CDBFEF /* StationManager.m */; };
 		410568E518AE800C00CDBFEF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410568E418AE800C00CDBFEF /* CoreLocation.framework */; };
+		410568E818AE84CF00CDBFEF /* PTSRecommendCFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 410568E718AE84CF00CDBFEF /* PTSRecommendCFViewController.m */; };
+		410568EC18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 410568EB18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m */; };
+		410568EE18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410568ED18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib */; };
 		50B83DAF02EB4268B9912154 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABD9E847C314E028B0C1ACC /* libPods.a */; };
 		8F6858C118AE216C0056D91D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C018AE216C0056D91D /* Foundation.framework */; };
 		8F6858C318AE216C0056D91D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C218AE216C0056D91D /* CoreGraphics.framework */; };
@@ -48,6 +51,11 @@
 		410568E118AE7FC900CDBFEF /* StationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationManager.h; sourceTree = "<group>"; };
 		410568E218AE7FC900CDBFEF /* StationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationManager.m; sourceTree = "<group>"; };
 		410568E418AE800C00CDBFEF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		410568E618AE84CF00CDBFEF /* PTSRecommendCFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSRecommendCFViewController.h; sourceTree = "<group>"; };
+		410568E718AE84CF00CDBFEF /* PTSRecommendCFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSRecommendCFViewController.m; sourceTree = "<group>"; };
+		410568EA18AE8ECA00CDBFEF /* PTSRecommendArtworkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSRecommendArtworkView.h; sourceTree = "<group>"; };
+		410568EB18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSRecommendArtworkView.m; sourceTree = "<group>"; };
+		410568ED18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PTSRecommendArtworkView.xib; sourceTree = "<group>"; };
 		8F6858BD18AE216C0056D91D /* PutTheSound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PutTheSound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F6858C018AE216C0056D91D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8F6858C218AE216C0056D91D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -107,6 +115,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		410568E918AE8E4D00CDBFEF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				410568EA18AE8ECA00CDBFEF /* PTSRecommendArtworkView.h */,
+				410568EB18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m */,
+				410568ED18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		8F6858B418AE216C0056D91D = {
 			isa = PBXGroup;
 			children = (
@@ -190,9 +208,12 @@
 		8F6858FD18AE27330056D91D /* RecommenView */ = {
 			isa = PBXGroup;
 			children = (
+				410568E918AE8E4D00CDBFEF /* View */,
 				8F68590818AE3BC60056D91D /* Model */,
 				8F6858F718AE271A0056D91D /* PTSRecommendViewController.h */,
 				8F6858F818AE271A0056D91D /* PTSRecommendViewController.m */,
+				410568E618AE84CF00CDBFEF /* PTSRecommendCFViewController.h */,
+				410568E718AE84CF00CDBFEF /* PTSRecommendCFViewController.m */,
 			);
 			name = RecommenView;
 			sourceTree = "<group>";
@@ -328,6 +349,7 @@
 			files = (
 				8F6858D918AE216D0056D91D /* Images.xcassets in Resources */,
 				8F6858CB18AE216C0056D91D /* InfoPlist.strings in Resources */,
+				410568EE18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib in Resources */,
 				8F6858D418AE216D0056D91D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				410568E818AE84CF00CDBFEF /* PTSRecommendCFViewController.m in Sources */,
 				8F6858D718AE216D0056D91D /* PTSViewController.m in Sources */,
 				8F68590B18AE3BEB0056D91D /* PTSRecommendAPIManager.m in Sources */,
 				8F68590718AE3BA40056D91D /* SCOUtilImageView.m in Sources */,
@@ -388,6 +411,7 @@
 				8F6858D118AE216D0056D91D /* PTSAppDelegate.m in Sources */,
 				8F6858CD18AE216D0056D91D /* main.m in Sources */,
 				8F6858F918AE271A0056D91D /* PTSRecommendViewController.m in Sources */,
+				410568EC18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m in Sources */,
 				410568E318AE7FC900CDBFEF /* StationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
