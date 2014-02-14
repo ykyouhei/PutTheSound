@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @protocol SCOUtilImageViewDelegate <NSObject>
-- (void)didPushImageViewWithSongUrl:(NSString*)stringUrl;
+- (void)didPushImageViewWithDictionary:(NSDictionary*)dictionary;
 @end
 
 @interface SCOUtilImageView : UIImageView
 @property(strong, nonatomic) NSString *songUrl;
 @property(weak, nonatomic) id<SCOUtilImageViewDelegate>delegate;
+@property(nonatomic) BOOL isPlaying;
 @end

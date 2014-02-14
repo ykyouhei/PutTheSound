@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *indicatorView;
 @property (nonatomic) AVAudioPlayer *audioPlayer;
+@property (nonatomic) NSString *selectedStringUrl;
 @end
 
 @implementation PTSRecommendViewController
@@ -62,6 +63,11 @@
     }
 }
 
+- (void)p_setUpLabelWithImageView:(SCOUtilImageView*)imageView isPlaying:(BOOL)flag {
+    imageView.isPlaying = flag;
+    [imageView setNeedsLayout];
+}
+
 #pragma mark - Table view data source
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
@@ -86,8 +92,7 @@
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_recommendItems[indexPath.row][@"artworkUrl100"]]]];
     imageView.image = image;
     imageView.songUrl = _recommendItems[indexPath.row][@"previewUrl"];
-    
-    //NSLog(@"%@",_playListSongs[_sectionPlayList[indexPath.section]][indexPath.row]);
+    [self p_setUpLabelWithImageView:imageView isPlaying:YES];
     
     return cell;
 }
@@ -102,15 +107,16 @@
 }
 
 #pragma mark - SCOUtilImageViewDelegate
--(void)didPushImageViewWithSongUrl:(NSString *)stringUrl {
-    NSURL *playUrl = _audioPlayer.url;
-    NSString *playString = [playUrl absoluteString];
-    if([stringUrl isEqualToString:playString]){
+-(void)didPushImageViewWithDictionary:(NSDictionary *)dictionary {
+    NSString *stringUrl = dictionary[@"songUrl"];
+    if([_selectedStringUrl isEqualToString:stringUrl]){
         if(_audioPlayer.playing){
             [self.audioPlayer pause];
+            [self p_setUpLabelWithImageView:dictionary[@"object"] isPlaying:YES];
             return;
         }
         else{
+            [self p_setUpLabelWithImageView:dictionary[@"object"] isPlaying:NO];
             [self.audioPlayer play];
             return;
         }
@@ -118,7 +124,9 @@
     NSURL *url = [NSURL URLWithString:stringUrl];
     NSData *data = [NSData dataWithContentsOfURL:url];
     self.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:nil];
-    [self.audioPlayer prepareToPlay];
+    [self.audioPlayer play];
+    [self setSelectedStringUrl:stringUrl];
+    [self p_setUpLabelWithImageView:dictionary[@"object"] isPlaying:NO];
 }
 
 #pragma mark - IBAction

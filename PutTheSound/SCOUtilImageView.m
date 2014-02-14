@@ -11,6 +11,7 @@
 @interface SCOUtilImageView () {
     UIView *_loadingView;
     UIActivityIndicatorView *_indicator;
+    UILabel *_label;
 }
 
 @end
@@ -44,6 +45,15 @@
         
         // インジケータ再生
         [_indicator startAnimating];
+        
+        
+        _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width / 4.0f, self.frame.size.height / 4.0f)];
+        [_label setCenter:CGPointMake(_loadingView.bounds.size.width / 2, _loadingView.bounds.size.height / 2)];
+        _label.backgroundColor = [UIColor whiteColor];
+        _label.alpha = 0.7f;
+        _label.textAlignment = NSTextAlignmentCenter;
+        _label.hidden = YES;
+        [self addSubview:_label];
     }
 }
 
@@ -64,9 +74,15 @@
     if(self.image){
         [_indicator stopAnimating];
         [_loadingView removeFromSuperview];
+        [_label setHidden:NO];
+    }
+    else {
+        [_label setHidden:YES];
     }
 
     self.userInteractionEnabled = ([self.songUrl isEqualToString:@""])?NO:YES;
+    
+    [self p_setUpLabelTitle];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -83,8 +99,12 @@
     //self.alpha = 1.0f;
     [self setHighlighted:NO];
     
-    if([self.delegate respondsToSelector:@selector(didPushImageViewWithSongUrl:)]){
-        [self.delegate didPushImageViewWithSongUrl:self.songUrl];
+    if([self.delegate respondsToSelector:@selector(didPushImageViewWithDictionary:)]){
+        
+        NSDictionary *dic = @{@"object":self,
+                              @"songUrl":_songUrl};
+        
+        [self.delegate didPushImageViewWithDictionary:dic];
     }
 }
 
@@ -103,6 +123,10 @@
     [super setHighlighted:highlighted];
 }
 
+#pragma mark - Private Methods
+- (void)p_setUpLabelTitle{
+    _label.text = !_isPlaying?@"Pause":@"Play";
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
