@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SCOUtilImageViewDelegate <NSObject>
+- (void)didPushImageViewWithSongUrl:(NSString*)stringUrl;
+@end
+
 @interface SCOUtilImageView : UIImageView
-@property(strong, nonatomic) NSString * hashTag;
-//@property(weak, nonatomic) id<SCOCreateMagicViewControllerDelegate>delegate;
+@property(strong, nonatomic) NSString *songUrl;
+@property(weak, nonatomic) id<SCOUtilImageViewDelegate>delegate;
 @end

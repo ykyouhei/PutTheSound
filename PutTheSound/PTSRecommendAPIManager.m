@@ -43,8 +43,13 @@ static NSString *const requestURL = @"http://ax.itunes.apple.com/WebObjects/MZSt
                                        return;
                                    }
                                    
+                                   //要素を削るなら高速列挙して抽出
+                                   /*
                                    for(NSDictionary *dic in jsonObject[@"results"]){
-                                   
+                                   }
+                                    */
+                                   if([self.delegate respondsToSelector:@selector(didFinishLoardWithObject:)]){
+                                       [self.delegate didFinishLoardWithObject:jsonObject[@"results"]];
                                    }
                                }
                                

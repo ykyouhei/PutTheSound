@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 #import "PTSRecommendAPIManager.h"
+#import "SCOUtilImageView.h"
 
-@interface PTSRecommendViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
+@interface PTSRecommendViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,PTSRecommendAPIManagerDelegate,SCOUtilImageViewDelegate>
 
 @end

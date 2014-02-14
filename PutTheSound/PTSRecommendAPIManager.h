@@ -8,7 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol PTSRecommendAPIManagerDelegate <NSObject>
+- (void)didFinishLoardWithObject:(NSArray*)array;
+@end
+
 @interface PTSRecommendAPIManager : NSObject
+@property (nonatomic,weak) id<PTSRecommendAPIManagerDelegate>delegate;
 + (PTSRecommendAPIManager *)sharedManager;
 - (void)request;
 @end

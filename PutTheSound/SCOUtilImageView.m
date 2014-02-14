@@ -66,7 +66,7 @@
         [_loadingView removeFromSuperview];
     }
 
-    self.userInteractionEnabled = ([self.hashTag isEqualToString:@""])?NO:YES;
+    self.userInteractionEnabled = ([self.songUrl isEqualToString:@""])?NO:YES;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -82,11 +82,10 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     //self.alpha = 1.0f;
     [self setHighlighted:NO];
-    /*
-    if([self.delegate respondsToSelector:@selector(didPushImageViewWithHashTag:)]){
-        [self.delegate didPushImageViewWithHashTag:self.hashTag];
+    
+    if([self.delegate respondsToSelector:@selector(didPushImageViewWithSongUrl:)]){
+        [self.delegate didPushImageViewWithSongUrl:self.songUrl];
     }
-     */
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
