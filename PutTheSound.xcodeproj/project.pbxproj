@@ -278,7 +278,7 @@
 				ORGANIZATIONNAME = "Toshiki Chiba";
 				TargetAttributes = {
 					8F6858BC18AE216C0056D91D = {
-						DevelopmentTeam = AVWWV46Y77;
+						DevelopmentTeam = 6EC83W22VX;
 					};
 					8F6858DD18AE216D0056D91D = {
 						TestTargetID = 8F6858BC18AE216C0056D91D;
@@ -548,6 +548,7 @@
 				8F6858F118AE216D0056D91D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8F6858F218AE216D0056D91D /* Build configuration list for PBXNativeTarget "PutTheSoundTests" */ = {
 			isa = XCConfigurationList;
@@ -556,6 +557,7 @@
 				8F6858F418AE216D0056D91D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
