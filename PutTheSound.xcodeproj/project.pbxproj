@@ -12,6 +12,7 @@
 		410568E818AE84CF00CDBFEF /* PTSRecommendCFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 410568E718AE84CF00CDBFEF /* PTSRecommendCFViewController.m */; };
 		410568EC18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 410568EB18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m */; };
 		410568EE18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410568ED18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib */; };
+		4114584518AFFACD00CA65F4 /* PutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4114584418AFFACD00CA65F4 /* PutView.xib */; };
 		41AE376118AF2F70008277CB /* PTSSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AE376018AF2F70008277CB /* PTSSlideViewController.m */; };
 		41AE376318AF44E7008277CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41AE376218AF44E7008277CB /* QuartzCore.framework */; };
 		41AE376718AF51C1008277CB /* PTSMusicDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AE376618AF51C1008277CB /* PTSMusicDataModel.m */; };
@@ -64,6 +65,7 @@
 		410568EA18AE8ECA00CDBFEF /* PTSRecommendArtworkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSRecommendArtworkView.h; sourceTree = "<group>"; };
 		410568EB18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSRecommendArtworkView.m; sourceTree = "<group>"; };
 		410568ED18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PTSRecommendArtworkView.xib; sourceTree = "<group>"; };
+		4114584418AFFACD00CA65F4 /* PutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PutView.xib; sourceTree = "<group>"; };
 		41AE375F18AF2F70008277CB /* PTSSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSSlideViewController.h; sourceTree = "<group>"; };
 		41AE376018AF2F70008277CB /* PTSSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSSlideViewController.m; sourceTree = "<group>"; };
 		41AE376218AF44E7008277CB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -318,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				8F8EC62918AFDE7C000D265E /* View.xib */,
+				4114584418AFFACD00CA65F4 /* PutView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -401,7 +404,7 @@
 				ORGANIZATIONNAME = "Toshiki Chiba";
 				TargetAttributes = {
 					8F6858BC18AE216C0056D91D = {
-						DevelopmentTeam = AVWWV46Y77;
+						DevelopmentTeam = 6EC83W22VX;
 					};
 					8F6858DD18AE216D0056D91D = {
 						TestTargetID = 8F6858BC18AE216C0056D91D;
@@ -432,6 +435,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4114584518AFFACD00CA65F4 /* PutView.xib in Resources */,
 				8F6858D918AE216D0056D91D /* Images.xcassets in Resources */,
 				8F8EC62A18AFDE7C000D265E /* View.xib in Resources */,
 				8F6858CB18AE216C0056D91D /* InfoPlist.strings in Resources */,
@@ -633,10 +637,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PutTheSound/PutTheSound-Prefix.pch";
 				INFOPLIST_FILE = "PutTheSound/PutTheSound-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -648,10 +654,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PutTheSound/PutTheSound-Prefix.pch";
 				INFOPLIST_FILE = "PutTheSound/PutTheSound-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

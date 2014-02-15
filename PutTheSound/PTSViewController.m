@@ -11,6 +11,7 @@
 #import "PTSSlideViewController.h"
 #import "PTSMusicDataModel.h"
 #import "PTSRecommendArtworkView.h"
+#import "StationManager.h"
 #import "UIImage+ImageEffects.h"
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
@@ -23,17 +24,27 @@
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 @property (weak, nonatomic) IBOutlet UIView *toolView;
 
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
 @property (nonatomic) MPMusicPlayerController *player;
 @property (nonatomic) BOOL isPlaying;
 @property (nonatomic) NSInteger playingAlbumIndex;
 
 @property (weak, nonatomic) PTSMusicDataModel *dataModel;
 
-@property (nonatomic) UIView *getView;
+@property (nonatomic) UIView *controllView;
 @property (nonatomic) UIView *getDetailView;
+@property (nonatomic) UIView *putDetailView;
 
 @property (nonatomic) AVAudioPlayer *audioPlayer;
 @property (nonatomic) NSString *selectedStringUrl;
+
+@property (nonatomic) NSArray *nearestStations;
+@property (nonatomic) NSString *selectedStationName;
+
+@property (nonatomic) NSDateFormatter *formatter;
+
 @end
 
 @implementation PTSViewController
@@ -42,6 +53,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.formatter = [[NSDateFormatter alloc] init];
+    [self.formatter setDateFormat:@"mm:ss"];
+    
     self.playingAlbumIndex = -1;
     self.dataModel = [PTSMusicDataModel sharedManager];
     
@@ -65,7 +79,9 @@
     self.player.repeatMode = MPMusicRepeatModeAll;
     
     //getView
+    [self p_setUpControllView];
     [self p_setUpGetView];
+    [self p_setUpPutView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -268,9 +284,13 @@
 }
 
 - (IBAction)didPushGetButton:(id)sender {
-    [[PTSMusicStationAPIManager sharedManager] setDelegate:self];
-    [[PTSMusicStationAPIManager sharedManager] getRequest];
+    [self p_openControllViewWithContent:_getDetailView];
 }
+
+- (IBAction)didPushPutButton:(id)sender {
+    [self p_openControllViewWithContent:_putDetailView];
+}
+
 
 
 /***************************************************/
@@ -303,14 +323,23 @@
         
         self.mainLabel.text = songDic[@"TITLE"];
         self.detailLabel.text = songDic[@"ALUBUMTITLE"];
+        
+        MPMediaItem *item = [self.player nowPlayingItem];
+        NSUInteger duration = [[item valueForKey:MPMediaItemPropertyPlaybackDuration] unsignedIntegerValue];
+        
+        // NSDateFormatter を用意します。
+        
+        self.timeLabel.text = [self.formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:duration]];
+        
+
     }
 }
 
-- (void)p_setUpGetView {
+- (void)p_setUpControllView {
     //ベース
-    self.getView = [UIView new];
-    self.getView.frame = CGRectMake(0.0f, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height / 2.0f);
-    self.getView.backgroundColor = [UIColor clearColor];
+    self.controllView = [UIView new];
+    self.controllView.frame = CGRectMake(0.0f, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height / 2.0f);
+    self.controllView.backgroundColor = [UIColor clearColor];
     
     //ブラー用
     UIToolbar *toolBar = [UIToolbar new];
@@ -320,58 +349,85 @@
     //つまみ
     UIImage *image = [UIImage imageNamed:@"pull.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    imageView.frame = CGRectMake((_getView.frame.size.width - image.size.width) / 2.0f,
+    imageView.frame = CGRectMake((_controllView.frame.size.width - image.size.width) / 2.0f,
                                  5.0f, image.size.width, image.size.height);
     
     //閉じるボタン
     UIButton *button = [[UIButton alloc] initWithFrame:imageView.frame];
     button.backgroundColor = [UIColor clearColor];
-    [button addTarget:self action:@selector(p_closeGetView) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(p_closeControllView) forControlEvents:UIControlEventTouchUpInside];
     
+    //角丸
+    self.controllView.clipsToBounds = YES;
+    self.controllView.layer.cornerRadius = 10;
+    toolBar.clipsToBounds = YES;
+    toolBar.layer.cornerRadius = 10;
+    
+    [toolBar addSubview:button];
+    [toolBar addSubview:imageView];
+    [self.controllView addSubview:toolBar];
+    [self.view addSubview:_controllView];
+}
+
+- (void)p_setUpGetView {
     //要素
     UINib *nib = [UINib nibWithNibName:@"View" bundle:nil];
     self.getDetailView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
     CGRect rect = _getDetailView.frame;
-    rect.origin.y = _getView.frame.size.height - _getDetailView.frame.size.height -20.0f;
+    rect.origin.y = _controllView.frame.size.height - _getDetailView.frame.size.height -20.0f;
     _getDetailView.frame = rect;
-    
-    //角丸
-    self.getView.clipsToBounds = YES;
-    self.getView.layer.cornerRadius = 10;
-    toolBar.clipsToBounds = YES;
-    toolBar.layer.cornerRadius = 10;
-    
-    [toolBar addSubview:_getDetailView];
-    [toolBar addSubview:button];
-    [toolBar addSubview:imageView];
-    [self.getView addSubview:toolBar];
-    [self.view addSubview:_getView];
 }
 
-- (void)p_openGetView {
-    CGRect frame = self.getView.frame;
-    frame.origin.y = self.view.frame.size.height - self.getView.frame.size.height;
+- (void)p_setUpPutView {
+    //要素
+    UINib *nib = [UINib nibWithNibName:@"PutView" bundle:nil];
+    self.putDetailView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+    CGRect rect = _putDetailView.frame;
+    rect.origin.y = _controllView.frame.size.height - _putDetailView.frame.size.height -20.0f;
+    _putDetailView.frame = rect;
+    UIPickerView *pickrView = (UIPickerView *)[_putDetailView viewWithTag:10];
+    pickrView.dataSource = self;
+    pickrView.delegate = self;
+}
+
+- (void)p_openControllViewWithContent:(UIView *)contentView {
+    CGRect frame = self.controllView.frame;
+    frame.origin.y = self.view.frame.size.height - self.controllView.frame.size.height;
     
     [UIView animateWithDuration:0.3 animations:^{
-        self.getView.frame = frame;
+        self.controllView.frame = frame;
+        [self.controllView addSubview:contentView];
+        contentView.tag = 1000;
     
     } completion:^(BOOL finished) {
         if (finished) {
-
+            if ([contentView isEqual:_getDetailView]) {
+                [[PTSMusicStationAPIManager sharedManager] setDelegate:self];
+                [[PTSMusicStationAPIManager sharedManager] getRequest];
+            } else if ([contentView isEqual:_putDetailView]) {
+                [[StationManager sharedManager] requestNearestStations:^(NSArray *stations, NSError *error) {
+                    self.nearestStations = stations;
+                    UIPickerView *pickrView = (UIPickerView *)[contentView viewWithTag:10];
+                    [pickrView reloadAllComponents];
+                }];
+                
+            }
         }
     }];
 }
 
-- (void)p_closeGetView {
-    CGRect frame = self.getView.frame;
+- (void)p_closeControllView {
+    CGRect frame = self.controllView.frame;
     frame.origin.y = self.view.frame.size.height;
     
     [UIView animateWithDuration:0.3 animations:^{
-        self.getView.frame = frame;;
+        self.controllView.frame = frame;;
         
     } completion:^(BOOL finished) {
         if (finished) {
             [self.audioPlayer pause];
+            UIView *contentView = [self.controllView viewWithTag:1000];
+            [contentView removeFromSuperview];
         }
     }];
 }
@@ -472,7 +528,6 @@
         [imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
             if (weakImageView) {
                 weakImageView.image = image;
-                [self p_openGetView];
                 [self p_setUpLabelWithImageView:weakImageView isPlaying:YES];
             }
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
@@ -480,4 +535,43 @@
 
     });
 }
+
+
+/***************************************************/
+#pragma mark - UIPickerViewDelegate/DataSource
+/***************************************************/
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return self.nearestStations ? self.nearestStations.count : 0;
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView
+            viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    
+    UILabel *retval = (id)view;
+    if (!retval) {
+        retval= [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [pickerView rowSizeForComponent:component].width, [pickerView rowSizeForComponent:component].height)];
+        retval.minimumScaleFactor = 0.1;
+        retval.textAlignment = NSTextAlignmentCenter;
+    }
+    retval.text = [NSString stringWithFormat:@"%@_%@", self.nearestStations[row][@"line"], self.nearestStations[row][@"name"]];
+    
+    return retval;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    if (!self.nearestStations) {
+        return;
+    }
+    
+    self.selectedStationName = [NSString stringWithFormat:@"%@_%@", self.nearestStations[row][@"line"], self.nearestStations[row][@"name"]];
+}
+
 @end
