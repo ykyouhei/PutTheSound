@@ -188,12 +188,47 @@
 #pragma mark - IBAction
 /***************************************************/
 - (IBAction)rightSwipeHandler:(id)sender {
-    [self.player skipToPreviousItem];
-    [self p_updateLabel];
+    if (self.playingAlbumIndex != self.carousel.currentItemIndex) {
+        return;
+    }
+    
+    PTSRecommendArtworkView *view = (PTSRecommendArtworkView *)[self.carousel currentItemView];
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect frame = view.frame;
+        frame.origin.x += 20;
+        view.frame = frame;
+        
+        frame.origin.x -= 20;
+        view.frame = frame;
+        
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self.player skipToPreviousItem];
+            [self p_updateLabel];
+        }
+    }];
+    
 }
 - (IBAction)leftSwipeHander:(id)sender {
-    [self.player skipToNextItem];
-    [self p_updateLabel];
+    if (self.playingAlbumIndex != self.carousel.currentItemIndex) {
+        return;
+    }
+    
+    PTSRecommendArtworkView *view = (PTSRecommendArtworkView *)[self.carousel currentItemView];
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect frame = view.frame;
+        frame.origin.x -= 20;
+        view.frame = frame;
+        
+        frame.origin.x += 20;
+        view.frame = frame;
+        
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self.player skipToNextItem];
+            [self p_updateLabel];
+        }
+    }];
 }
 
 - (IBAction)didPushOpenRecommend:(id)sender {
