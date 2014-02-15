@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		410568E318AE7FC900CDBFEF /* StationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 410568E218AE7FC900CDBFEF /* StationManager.m */; };
+		410568E518AE800C00CDBFEF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 410568E418AE800C00CDBFEF /* CoreLocation.framework */; };
+		410568E818AE84CF00CDBFEF /* PTSRecommendCFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 410568E718AE84CF00CDBFEF /* PTSRecommendCFViewController.m */; };
+		410568EC18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 410568EB18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m */; };
+		410568EE18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410568ED18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib */; };
+		50B83DAF02EB4268B9912154 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABD9E847C314E028B0C1ACC /* libPods.a */; };
 		8F6858C118AE216C0056D91D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C018AE216C0056D91D /* Foundation.framework */; };
 		8F6858C318AE216C0056D91D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C218AE216C0056D91D /* CoreGraphics.framework */; };
 		8F6858C518AE216C0056D91D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C418AE216C0056D91D /* UIKit.framework */; };
@@ -40,6 +46,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27924284C724403C9FDAAD60 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		2ABD9E847C314E028B0C1ACC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		410568E118AE7FC900CDBFEF /* StationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationManager.h; sourceTree = "<group>"; };
+		410568E218AE7FC900CDBFEF /* StationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationManager.m; sourceTree = "<group>"; };
+		410568E418AE800C00CDBFEF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		410568E618AE84CF00CDBFEF /* PTSRecommendCFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSRecommendCFViewController.h; sourceTree = "<group>"; };
+		410568E718AE84CF00CDBFEF /* PTSRecommendCFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSRecommendCFViewController.m; sourceTree = "<group>"; };
+		410568EA18AE8ECA00CDBFEF /* PTSRecommendArtworkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSRecommendArtworkView.h; sourceTree = "<group>"; };
+		410568EB18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSRecommendArtworkView.m; sourceTree = "<group>"; };
+		410568ED18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PTSRecommendArtworkView.xib; sourceTree = "<group>"; };
 		8F6858BD18AE216C0056D91D /* PutTheSound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PutTheSound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F6858C018AE216C0056D91D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8F6858C218AE216C0056D91D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -77,10 +93,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				410568E518AE800C00CDBFEF /* CoreLocation.framework in Frameworks */,
 				8F6858F618AE217E0056D91D /* AVFoundation.framework in Frameworks */,
 				8F6858C318AE216C0056D91D /* CoreGraphics.framework in Frameworks */,
 				8F6858C518AE216C0056D91D /* UIKit.framework in Frameworks */,
 				8F6858C118AE216C0056D91D /* Foundation.framework in Frameworks */,
+				50B83DAF02EB4268B9912154 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +115,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		410568E918AE8E4D00CDBFEF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				410568EA18AE8ECA00CDBFEF /* PTSRecommendArtworkView.h */,
+				410568EB18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m */,
+				410568ED18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		8F6858B418AE216C0056D91D = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +132,7 @@
 				8F6858E518AE216D0056D91D /* PutTheSoundTests */,
 				8F6858BF18AE216C0056D91D /* Frameworks */,
 				8F6858BE18AE216C0056D91D /* Products */,
+				27924284C724403C9FDAAD60 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,11 +148,13 @@
 		8F6858BF18AE216C0056D91D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				410568E418AE800C00CDBFEF /* CoreLocation.framework */,
 				8F6858F518AE217D0056D91D /* AVFoundation.framework */,
 				8F6858C018AE216C0056D91D /* Foundation.framework */,
 				8F6858C218AE216C0056D91D /* CoreGraphics.framework */,
 				8F6858C418AE216C0056D91D /* UIKit.framework */,
 				8F6858DF18AE216D0056D91D /* XCTest.framework */,
+				2ABD9E847C314E028B0C1ACC /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -177,9 +208,12 @@
 		8F6858FD18AE27330056D91D /* RecommenView */ = {
 			isa = PBXGroup;
 			children = (
+				410568E918AE8E4D00CDBFEF /* View */,
 				8F68590818AE3BC60056D91D /* Model */,
 				8F6858F718AE271A0056D91D /* PTSRecommendViewController.h */,
 				8F6858F818AE271A0056D91D /* PTSRecommendViewController.m */,
+				410568E618AE84CF00CDBFEF /* PTSRecommendCFViewController.h */,
+				410568E718AE84CF00CDBFEF /* PTSRecommendCFViewController.m */,
 			);
 			name = RecommenView;
 			sourceTree = "<group>";
@@ -214,6 +248,8 @@
 		8F68590418AE3B990056D91D /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				410568E118AE7FC900CDBFEF /* StationManager.h */,
+				410568E218AE7FC900CDBFEF /* StationManager.m */,
 				8F68590518AE3BA40056D91D /* SCOUtilImageView.h */,
 				8F68590618AE3BA40056D91D /* SCOUtilImageView.m */,
 			);
@@ -236,9 +272,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F6858EF18AE216D0056D91D /* Build configuration list for PBXNativeTarget "PutTheSound" */;
 			buildPhases = (
+				D9F5C767304B4ADB958806A5 /* Check Pods Manifest.lock */,
 				8F6858B918AE216C0056D91D /* Sources */,
 				8F6858BA18AE216C0056D91D /* Frameworks */,
 				8F6858BB18AE216C0056D91D /* Resources */,
+				3875FBB4995643DB952FC3B5 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -278,7 +316,7 @@
 				ORGANIZATIONNAME = "Toshiki Chiba";
 				TargetAttributes = {
 					8F6858BC18AE216C0056D91D = {
-						DevelopmentTeam = AVWWV46Y77;
+						DevelopmentTeam = 6EC83W22VX;
 					};
 					8F6858DD18AE216D0056D91D = {
 						TestTargetID = 8F6858BC18AE216C0056D91D;
@@ -311,6 +349,7 @@
 			files = (
 				8F6858D918AE216D0056D91D /* Images.xcassets in Resources */,
 				8F6858CB18AE216C0056D91D /* InfoPlist.strings in Resources */,
+				410568EE18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib in Resources */,
 				8F6858D418AE216D0056D91D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,11 +364,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3875FBB4995643DB952FC3B5 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9F5C767304B4ADB958806A5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8F6858B918AE216C0056D91D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				410568E818AE84CF00CDBFEF /* PTSRecommendCFViewController.m in Sources */,
 				8F6858D718AE216D0056D91D /* PTSViewController.m in Sources */,
 				8F68590B18AE3BEB0056D91D /* PTSRecommendAPIManager.m in Sources */,
 				8F68590718AE3BA40056D91D /* SCOUtilImageView.m in Sources */,
@@ -338,6 +411,8 @@
 				8F6858D118AE216D0056D91D /* PTSAppDelegate.m in Sources */,
 				8F6858CD18AE216D0056D91D /* main.m in Sources */,
 				8F6858F918AE271A0056D91D /* PTSRecommendViewController.m in Sources */,
+				410568EC18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m in Sources */,
+				410568E318AE7FC900CDBFEF /* StationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +536,7 @@
 		};
 		8F6858F018AE216D0056D91D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27924284C724403C9FDAAD60 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -475,6 +551,7 @@
 		};
 		8F6858F118AE216D0056D91D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27924284C724403C9FDAAD60 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -548,6 +625,7 @@
 				8F6858F118AE216D0056D91D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8F6858F218AE216D0056D91D /* Build configuration list for PBXNativeTarget "PutTheSoundTests" */ = {
 			isa = XCConfigurationList;
@@ -556,6 +634,7 @@
 				8F6858F418AE216D0056D91D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
