@@ -9,5 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface PTSCrossingMusicManager : NSObject
-
++ (PTSCrossingMusicManager *)sharedManager;
+- (void)addSongObject:(NSDictionary*)dic;
+- (NSArray*)getSongsArray;
+- (void)resetSongsArray;
+- (BOOL)containSongID:(NSString*)string;
 @end

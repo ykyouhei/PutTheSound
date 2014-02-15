@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SCOUtilImageView.h"
 
-@interface PTSCrossingMusicViewController : UIViewController
-
+@interface PTSCrossingMusicViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,SCOUtilImageViewDelegate>
+- (void)updateTableView;
 @end
