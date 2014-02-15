@@ -425,6 +425,7 @@
         
     } completion:^(BOOL finished) {
         if (finished) {
+            [self.audioPlayer pause];
             UIView *contentView = [self.controllView viewWithTag:1000];
             [contentView removeFromSuperview];
         }
