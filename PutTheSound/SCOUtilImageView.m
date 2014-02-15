@@ -11,7 +11,7 @@
 @interface SCOUtilImageView () {
     UIView *_loadingView;
     UIActivityIndicatorView *_indicator;
-    UILabel *_label;
+    UIImageView *_playView;
 }
 
 @end
@@ -46,14 +46,21 @@
         // インジケータ再生
         [_indicator startAnimating];
         
+        _playView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 67.0f, 67.0f)];
+        [_playView setCenter:CGPointMake(_loadingView.bounds.size.width / 2, _loadingView.bounds.size.height / 2)];
         
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width / 4.0f, self.frame.size.height / 4.0f)];
-        [_label setCenter:CGPointMake(_loadingView.bounds.size.width / 2, _loadingView.bounds.size.height / 2)];
-        _label.backgroundColor = [UIColor whiteColor];
-        _label.alpha = 0.7f;
-        _label.textAlignment = NSTextAlignmentCenter;
-        _label.hidden = YES;
-        [self addSubview:_label];
+        [self addSubview:_playView];
+        
+        CALayer* subLayer = [CALayer layer];
+        subLayer.frame = self.bounds;
+        [self.layer addSublayer:subLayer];
+        subLayer.masksToBounds = YES;
+        UIBezierPath* path = [UIBezierPath bezierPathWithRect:
+                              CGRectMake(-10.0, self.frame.size.height - 40.0, self.frame.size.width + 20, 50.0)];
+        subLayer.shadowOffset = CGSizeMake(0.0, 10.0);
+        subLayer.shadowColor = [[UIColor blackColor] CGColor];
+        subLayer.shadowOpacity = 0.7;
+        subLayer.shadowPath = [path CGPath];
     }
 }
 
@@ -74,15 +81,15 @@
     if(self.image){
         [_indicator stopAnimating];
         [_loadingView removeFromSuperview];
-        [_label setHidden:NO];
+        [_playView setHidden:NO];
     }
     else {
-        [_label setHidden:YES];
+        [_playView setHidden:YES];
     }
 
     self.userInteractionEnabled = ([self.songUrl isEqualToString:@""])?NO:YES;
     
-    [self p_setUpLabelTitle];
+    [self p_setUpPlayView];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -124,8 +131,9 @@
 }
 
 #pragma mark - Private Methods
-- (void)p_setUpLabelTitle{
-    _label.text = !_isPlaying?@"Pause":@"Play";
+- (void)p_setUpPlayView{
+    UIImage *image = [UIImage imageNamed:!_isPlaying?@"stop.png":@"play.png"];
+    _playView.image = image;
 }
 /*
 // Only override drawRect: if you perform custom drawing.

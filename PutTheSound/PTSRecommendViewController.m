@@ -7,6 +7,7 @@
 //
 
 #import "PTSRecommendViewController.h"
+#import "PTSRecommendArtworkView.h"
 
 @interface PTSRecommendViewController ()
 @property (nonatomic) NSArray *recommendItems;
@@ -92,6 +93,20 @@
     
     SCOUtilImageView *imageView = (SCOUtilImageView*)[cell viewWithTag:100];
     imageView.delegate = self;
+    
+    // 画像取得（UIImage+AFNetworking）
+    /*
+    NSURL *url = [NSURL URLWithString:_recommendItems[indexPath.row][@"artworkUrl100"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    __weak PTSRecommendArtworkView *weakView = (PTSRecommendArtworkView *)imageView;
+    [(PTSRecommendArtworkView *)imageView.artworkImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        if (weakView) {
+            weakView.artworkImageView.image = image;
+            [weakView setNeedsLayout];
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+    }];*/
+
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_recommendItems[indexPath.row][@"artworkUrl100"]]]];
     imageView.image = image;
     imageView.songUrl = _recommendItems[indexPath.row][@"previewUrl"];
