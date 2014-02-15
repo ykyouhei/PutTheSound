@@ -40,6 +40,7 @@
 		8F8EC62A18AFDE7C000D265E /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8EC62918AFDE7C000D265E /* View.xib */; };
 		8F8EC62E18AFE43A000D265E /* PTSMusicStationAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8EC62D18AFE43A000D265E /* PTSMusicStationAPIManager.m */; };
 		8F8EC63218AFFAA9000D265E /* PTSCrossingMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8EC63118AFFAA9000D265E /* PTSCrossingMusicViewController.m */; };
+		8F8EC63618AFFE47000D265E /* PTSCrossingMusicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8EC63518AFFE47000D265E /* PTSCrossingMusicManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,8 @@
 		8F8EC62D18AFE43A000D265E /* PTSMusicStationAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSMusicStationAPIManager.m; sourceTree = "<group>"; };
 		8F8EC63018AFFAA9000D265E /* PTSCrossingMusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSCrossingMusicViewController.h; sourceTree = "<group>"; };
 		8F8EC63118AFFAA9000D265E /* PTSCrossingMusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSCrossingMusicViewController.m; sourceTree = "<group>"; };
+		8F8EC63418AFFE47000D265E /* PTSCrossingMusicManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSCrossingMusicManager.h; sourceTree = "<group>"; };
+		8F8EC63518AFFE47000D265E /* PTSCrossingMusicManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSCrossingMusicManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,10 +334,20 @@
 		8F8EC62F18AFFA3A000D265E /* CrossingMusicTable */ = {
 			isa = PBXGroup;
 			children = (
+				8F8EC63318AFFE1D000D265E /* Model */,
 				8F8EC63018AFFAA9000D265E /* PTSCrossingMusicViewController.h */,
 				8F8EC63118AFFAA9000D265E /* PTSCrossingMusicViewController.m */,
 			);
 			name = CrossingMusicTable;
+			sourceTree = "<group>";
+		};
+		8F8EC63318AFFE1D000D265E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8F8EC63418AFFE47000D265E /* PTSCrossingMusicManager.h */,
+				8F8EC63518AFFE47000D265E /* PTSCrossingMusicManager.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,6 +500,7 @@
 				8F6858CD18AE216D0056D91D /* main.m in Sources */,
 				8F6858F918AE271A0056D91D /* PTSRecommendViewController.m in Sources */,
 				41AE376718AF51C1008277CB /* PTSMusicDataModel.m in Sources */,
+				8F8EC63618AFFE47000D265E /* PTSCrossingMusicManager.m in Sources */,
 				410568EC18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m in Sources */,
 				8F8EC62E18AFE43A000D265E /* PTSMusicStationAPIManager.m in Sources */,
 				41AE376118AF2F70008277CB /* PTSSlideViewController.m in Sources */,
