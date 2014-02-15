@@ -12,6 +12,7 @@
 		410568E818AE84CF00CDBFEF /* PTSRecommendCFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 410568E718AE84CF00CDBFEF /* PTSRecommendCFViewController.m */; };
 		410568EC18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 410568EB18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m */; };
 		410568EE18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410568ED18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib */; };
+		41AE376118AF2F70008277CB /* PTSSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AE376018AF2F70008277CB /* PTSSlideViewController.m */; };
 		50B83DAF02EB4268B9912154 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABD9E847C314E028B0C1ACC /* libPods.a */; };
 		8F6858C118AE216C0056D91D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C018AE216C0056D91D /* Foundation.framework */; };
 		8F6858C318AE216C0056D91D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C218AE216C0056D91D /* CoreGraphics.framework */; };
@@ -56,6 +57,8 @@
 		410568EA18AE8ECA00CDBFEF /* PTSRecommendArtworkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSRecommendArtworkView.h; sourceTree = "<group>"; };
 		410568EB18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSRecommendArtworkView.m; sourceTree = "<group>"; };
 		410568ED18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PTSRecommendArtworkView.xib; sourceTree = "<group>"; };
+		41AE375F18AF2F70008277CB /* PTSSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSSlideViewController.h; sourceTree = "<group>"; };
+		41AE376018AF2F70008277CB /* PTSSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSSlideViewController.m; sourceTree = "<group>"; };
 		8F6858BD18AE216C0056D91D /* PutTheSound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PutTheSound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F6858C018AE216C0056D91D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8F6858C218AE216C0056D91D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -125,6 +128,15 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		41AE375E18AF2F32008277CB /* SlideController */ = {
+			isa = PBXGroup;
+			children = (
+				41AE375F18AF2F70008277CB /* PTSSlideViewController.h */,
+				41AE376018AF2F70008277CB /* PTSSlideViewController.m */,
+			);
+			name = SlideController;
+			sourceTree = "<group>";
+		};
 		8F6858B418AE216C0056D91D = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +174,7 @@
 		8F6858C618AE216C0056D91D /* PutTheSound */ = {
 			isa = PBXGroup;
 			children = (
+				41AE375E18AF2F32008277CB /* SlideController */,
 				8F68590418AE3B990056D91D /* Util */,
 				8F68590018AE29710056D91D /* Category */,
 				8F6858FF18AE27510056D91D /* MusicControlView */,
@@ -412,6 +425,7 @@
 				8F6858CD18AE216D0056D91D /* main.m in Sources */,
 				8F6858F918AE271A0056D91D /* PTSRecommendViewController.m in Sources */,
 				410568EC18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m in Sources */,
+				41AE376118AF2F70008277CB /* PTSSlideViewController.m in Sources */,
 				410568E318AE7FC900CDBFEF /* StationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

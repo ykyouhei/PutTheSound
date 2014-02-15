@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 
+@class PTSSlideViewController;
+
 @interface PTSViewController : UIViewController
+
+@property (nonatomic, weak) PTSSlideViewController *slideVC;
+
 @end
