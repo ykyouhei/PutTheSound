@@ -10,7 +10,9 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 @interface PTSPlayListViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
+
 @property (nonatomic) MPMusicPlayerController *player;
+@property (nonatomic) NSDictionary *selectedSong;
 
 
 @end
