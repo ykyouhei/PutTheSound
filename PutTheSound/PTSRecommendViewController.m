@@ -84,6 +84,9 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    UILabel *alubumLabel = (UILabel*)[cell viewWithTag:500];
+    alubumLabel.text = _recommendItems[indexPath.row][@"collectionName"];
+    
     UILabel *mainLabel = (UILabel*)[cell viewWithTag:200];
     mainLabel.text = _recommendItems[indexPath.row][@"trackName"];
     

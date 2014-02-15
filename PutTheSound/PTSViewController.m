@@ -43,12 +43,12 @@
     else{
         self.playButton.hidden = NO;
         /*
-        NSDictionary *songDic = @{@"ID":[song valueForProperty: MPMediaItemPropertyPersistentID],
-                                  @"TITLE":[song valueForProperty: MPMediaItemPropertyTitle],
-                                  @"ARTIST":[song valueForProperty: MPMediaItemPropertyArtist],
-                                  @"ALUBUMTITLE":[song valueForProperty: MPMediaItemPropertyAlbumTitle],
-                                  @"ARTWORK":[song valueForProperty: MPMediaItemPropertyArtwork]};
-        
+         NSDictionary *songDic = @{@"ID":[song valueForProperty: MPMediaItemPropertyPersistentID],
+         @"TITLE":[song valueForProperty: MPMediaItemPropertyTitle],
+         @"ARTIST":[song valueForProperty: MPMediaItemPropertyArtist],
+         @"ALUBUMTITLE":[song valueForProperty: MPMediaItemPropertyAlbumTitle],
+         @"ARTWORK":[song valueForProperty: MPMediaItemPropertyArtwork]};
+         
          MPMediaQuery *songQuery = [MPMediaQuery songsQuery];
          NSNumber *persistentId = songDic[@"ID"];
          MPMediaPropertyPredicate *predicate = [MPMediaPropertyPredicate predicateWithValue:persistentId forProperty:MPMediaItemPropertyPersistentID];
@@ -138,21 +138,24 @@
 }
 
 - (void)p_updateLabel {
-    MPMediaItem *song = [self.player nowPlayingItem];
-    NSDictionary *songDic = @{@"ID":[song valueForProperty: MPMediaItemPropertyPersistentID],
-                              @"TITLE":[song valueForProperty: MPMediaItemPropertyTitle],
-                              @"ARTIST":[song valueForProperty: MPMediaItemPropertyArtist],
-                              @"ALUBUMTITLE":[song valueForProperty: MPMediaItemPropertyAlbumTitle],
-                              @"ARTWORK":[song valueForProperty: MPMediaItemPropertyArtwork]};
-    self.mainLabel.text = songDic[@"TITLE"];
-    self.detailLabel.text = songDic[@"ALUBUMTITLE"];
-    MPMediaItemArtwork *artwork =  songDic[@"ARTWORK"];
-    self.imageView.image = [artwork imageWithSize:CGSizeMake(320.0f, 320.0f)];
+    if(_isPlaying){
+        
+        MPMediaItem *song = [self.player nowPlayingItem];
+        NSDictionary *songDic = @{@"ID":[song valueForProperty: MPMediaItemPropertyPersistentID],
+                                  @"TITLE":[song valueForProperty: MPMediaItemPropertyTitle],
+                                  @"ARTIST":[song valueForProperty: MPMediaItemPropertyArtist],
+                                  @"ALUBUMTITLE":[song valueForProperty: MPMediaItemPropertyAlbumTitle],
+                                  @"ARTWORK":[song valueForProperty: MPMediaItemPropertyArtwork]};
+        self.mainLabel.text = songDic[@"TITLE"];
+        self.detailLabel.text = songDic[@"ALUBUMTITLE"];
+        MPMediaItemArtwork *artwork =  songDic[@"ARTWORK"];
+        self.imageView.image = [artwork imageWithSize:CGSizeMake(320.0f, 320.0f)];
+    }
 }
 
 #pragma mark - Navigation
 
-// In a story board-based application, you will often want to do a little preparation before navigation
+// In a story board-based application, you will often want to do a little pxreparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].
