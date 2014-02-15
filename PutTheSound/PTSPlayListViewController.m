@@ -13,7 +13,6 @@
 @property (nonatomic) NSMutableArray *sectionPlayList;
 @property (nonatomic) NSMutableArray *sectionSongs;
 @property (nonatomic) NSMutableDictionary *playListSongs;
-@property (nonatomic) NSDictionary *selectedSong;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 

@@ -30,7 +30,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.dataModel = [PTSMusicDataModel sharedManager];
+    
     self.carousel.dataSource = self.dataModel;
+    self.carousel.delegate = self;
+    self.carousel.type = 0;
+    self.carousel.vertical = YES;
+    
     self.player = [MPMusicPlayerController iPodMusicPlayer];
 }
 
@@ -40,7 +45,80 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
+/***************************************************/
+#pragma mark - iCarouselDelegate
+/***************************************************/
+
+- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
+{
+    self.dataModel.selectedSong = self.dataModel.playListSongs[self.dataModel.sectionPlayList[index]][0];
+    
+    //　プレイリストでグループ化するクエリを生成
+    MPMediaQuery *query = [MPMediaQuery albumsQuery];
+    //　曲の一覧を取得
+    NSArray *playlists = query.collections;
+    
+    //　全てのグループについてプレイリスト名を比較
+    for (MPMediaItemCollection *playlist in playlists) {
+        
+        if([[playlist.items[0] valueForProperty: MPMediaItemPropertyAlbumTitle] isEqualToString:self.dataModel.selectedSong[@"ALUBUMTITLE"]]){
+            [self.player setQueueWithItemCollection:playlist];
+            break;
+        }
+    }
+    
+    [self.player play];
+    [self.playButton setTitle:@"Pause" forState:UIControlStateNormal];
+    _isPlaying = YES;
+    
+    [self p_updateLabel];
+}
+
+- (CATransform3D)carousel:(iCarousel *)_carousel itemTransformForOffset:(CGFloat)offset baseTransform:(CATransform3D)transform
+{
+    //implement 'flip3D' style carousel
+    transform = CATransform3DRotate(transform, M_PI / 8.0f, 0.0f, 1.0f, 0.0f);
+    return CATransform3DTranslate(transform, 0.0f, 0.0f, offset * self.carousel.itemWidth);
+}
+
+- (CGFloat)carousel:(iCarousel *)_carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
+{
+    //customize carousel display
+    switch (option)
+    {
+        case iCarouselOptionWrap:
+        {
+            //normally you would hard-code this to YES or NO
+            return YES;
+        }
+        case iCarouselOptionSpacing:
+        {
+            //add a bit of spacing between the item views
+            return value * 1.05f;
+        }
+        case iCarouselOptionFadeMax:
+        {
+            if (self.carousel.type == iCarouselTypeCustom)
+            {
+                //set opacity based on distance from camera
+                return 0.0f;
+            }
+            return value*2;
+        }
+        default:
+        {
+            return value;
+        }
+    }
+}
+
+
+/***************************************************/
 #pragma mark - IBAction
+/***************************************************/
+
 - (IBAction)didPushPlayButton:(id)sender {
     [self p_setUpButton];
 }
@@ -67,7 +145,12 @@
     }
 }
 
+
+
+/***************************************************/
 #pragma mark - PrivateMethods
+/***************************************************/
+
 - (void)p_setUpButton {
     if(_isPlaying){
         [self.player pause];
@@ -105,16 +188,5 @@
     }
 }
 
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little pxreparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    if([[segue identifier] isEqualToString:@"ControlViewToPlayListView"]){
-        PTSPlayListViewController *nextViewController = [segue destinationViewController];
-        nextViewController.player = _player;
-    }
-}
 
 @end
