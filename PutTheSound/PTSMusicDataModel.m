@@ -83,9 +83,9 @@ static PTSMusicDataModel *_sharedInstance;
         view = [PTSRecommendArtworkView instanceFromNib];
     }
     
-    view.titleLabel.text = _sectionPlayList[index];
+    view.mainLabel.text = _sectionPlayList[index];
     MPMediaItemArtwork *artwork = _playListSongs[_sectionPlayList[index]][0][@"ARTWORK"];
-    view.artworkImageView.image = [artwork imageWithSize:CGSizeMake(200.0f, 200.0f)];
+    view.artworkImageView.image = [artwork imageWithSize:CGSizeMake(220.0f, 220.0f)];
     
     return view;
 }

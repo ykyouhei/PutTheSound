@@ -40,15 +40,14 @@
     self.carousel.type = 0;
     self.carousel.vertical = YES;
     
-    CAGradientLayer *pageGradient = [CAGradientLayer layer];
-    pageGradient.frame = self.toolView.bounds;
-    pageGradient.colors =
-    [NSArray arrayWithObjects:
-     // 赤から黒へグラデーションします。
-     (id)[UIColor colorWithWhite:0.0 alpha:0.9].CGColor,
-     (id)[UIColor colorWithWhite:0.0 alpha:0.6].CGColor,
-     (id)[UIColor colorWithWhite:0.0 alpha:0.05].CGColor, nil];
-    [self.toolView.layer insertSublayer:pageGradient atIndex:0];
+//    CAGradientLayer *pageGradient = [CAGradientLayer layer];
+//    pageGradient.frame = self.toolView.bounds;
+//    pageGradient.colors =
+//    [NSArray arrayWithObjects:
+//     (id)[UIColor colorWithWhite:0.0 alpha:0.9].CGColor,
+//     (id)[UIColor colorWithWhite:0.0 alpha:0.6].CGColor,
+//     (id)[UIColor colorWithWhite:0.0 alpha:0.05].CGColor, nil];
+//    [self.toolView.layer insertSublayer:pageGradient atIndex:0];
     
     self.player = [MPMusicPlayerController iPodMusicPlayer];
 }
@@ -137,18 +136,19 @@
 /***************************************************/
 #pragma mark - IBAction
 /***************************************************/
+- (IBAction)rightSwipeHandler:(id)sender {
+    [self.player skipToPreviousItem];
+    [self p_updateLabel];
+}
+- (IBAction)leftSwipeHander:(id)sender {
+    [self.player skipToNextItem];
+    [self p_updateLabel];
+}
 
 - (IBAction)didPushPlayButton:(id)sender {
     [self p_setUpButton];
 }
-- (IBAction)didPushBackButton:(id)sender {
-    [self.player skipToPreviousItem];
-    [self p_updateLabel];
-}
-- (IBAction)didPushNextButton:(id)sender {
-    [self.player skipToNextItem];
-    [self p_updateLabel];
-}
+
 - (IBAction)didPushOpenRecommend:(id)sender {
     if (self.slideVC.isClosed) {
         [self.slideVC shouldOpenLeft];
@@ -200,10 +200,9 @@
                                   @"ARTIST":[song valueForProperty: MPMediaItemPropertyArtist],
                                   @"ALUBUMTITLE":[song valueForProperty: MPMediaItemPropertyAlbumTitle],
                                   @"ARTWORK":[song valueForProperty: MPMediaItemPropertyArtwork]};
+        
         self.mainLabel.text = songDic[@"TITLE"];
         self.detailLabel.text = songDic[@"ALUBUMTITLE"];
-//        MPMediaItemArtwork *artwork =  songDic[@"ARTWORK"];
-//        self.imageView.image = [artwork imageWithSize:CGSizeMake(320.0f, 320.0f)];
     }
 }
 

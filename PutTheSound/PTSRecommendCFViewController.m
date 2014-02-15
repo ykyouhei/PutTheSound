@@ -87,7 +87,7 @@
     
 //    view.artworkImageView.delegate = self;
 //    view.artworkImageView.songUrl = _recommendItems[index][@"previewUrl"];
-    view.titleLabel.text = _recommendItems[index][@"trackName"];
+    view.mainLabel.text = _recommendItems[index][@"trackName"];
     [self p_setUpLabelWithImageView:((PTSRecommendArtworkView *)view).artworkImageView isPlaying:YES];
     
     // 画像取得（UIImage+AFNetworking）
