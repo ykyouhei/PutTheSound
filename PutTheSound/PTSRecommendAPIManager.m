@@ -11,6 +11,7 @@
 static PTSRecommendAPIManager *_sharedManager = nil;
 // Request URL
 static NSString *const requestURL = @"http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/wa/wsSearch?term=AKON&country=JP&entity=musicTrack";
+//static NSString *const requestURL = @"http://www1415uo.sakura.ne.jp/music/Recommend.php?lat=0&lon=0";
 
 @implementation PTSRecommendAPIManager
 + (PTSRecommendAPIManager *)sharedManager {
