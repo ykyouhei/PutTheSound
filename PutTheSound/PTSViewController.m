@@ -130,6 +130,10 @@
 
 - (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel
 {
+    if(self.dataModel.playListSongs.count == 0){
+        return;
+    }
+    
     MPMediaItemArtwork *artwork = self.dataModel.playListSongs[self.dataModel.sectionPlayList[carousel.currentItemIndex]][0][@"ARTWORK"];
     self.backgroundImageView.image = [[artwork imageWithSize:self.backgroundImageView.frame.size] applyLightEffect];
 }

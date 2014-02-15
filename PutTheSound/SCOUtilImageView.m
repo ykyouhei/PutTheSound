@@ -51,6 +51,7 @@
         
         [self addSubview:_playView];
         
+        /*
         CALayer* subLayer = [CALayer layer];
         subLayer.frame = self.bounds;
         [self.layer addSublayer:subLayer];
@@ -61,6 +62,15 @@
         subLayer.shadowColor = [[UIColor blackColor] CGColor];
         subLayer.shadowOpacity = 0.7;
         subLayer.shadowPath = [path CGPath];
+        */
+        
+        CAGradientLayer *pageGradient = [CAGradientLayer layer];
+        pageGradient.frame = CGRectMake(0.0, self.frame.size.height - 60.0, self.frame.size.width, 60.0);
+        pageGradient.colors =
+        [NSArray arrayWithObjects:
+         (id)[UIColor colorWithWhite:0.0 alpha:0.0].CGColor,
+         (id)[UIColor colorWithWhite:0.0 alpha:1.0].CGColor, nil];
+        [self.layer insertSublayer:pageGradient atIndex:0];
     }
 }
 
