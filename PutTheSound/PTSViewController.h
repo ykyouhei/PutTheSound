@@ -11,10 +11,14 @@
 #import <iCarousel/iCarousel.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "PTSMusicStationAPIManager.h"
+#import "SCOUtilImageView.h"
+#import "PTSRecommendArtworkView.h"
+
 @class PTSSlideViewController;
 
 @interface PTSViewController : UIViewController
-<iCarouselDelegate, iCarouselDataSource>
+<iCarouselDelegate, iCarouselDataSource,PTSMusicStationAPIManagerDelegate,SCOUtilImageViewDelegate>
 
 @property (nonatomic, weak) PTSSlideViewController *slideVC;
 

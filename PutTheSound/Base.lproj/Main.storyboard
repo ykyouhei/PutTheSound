@@ -74,6 +74,9 @@
                                         <state key="normal" backgroundImage="put">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didPushGetButton:" destination="u3I-pd-yfk" eventType="touchUpInside" id="arz-7L-2kJ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jb9-xw-5LR">
                                         <rect key="frame" x="276" y="219" width="30" height="35"/>

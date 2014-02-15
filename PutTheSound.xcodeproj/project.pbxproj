@@ -37,6 +37,8 @@
 		8F68590318AE29850056D91D /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F68590218AE29850056D91D /* UIColor+Hex.m */; };
 		8F68590718AE3BA40056D91D /* SCOUtilImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F68590618AE3BA40056D91D /* SCOUtilImageView.m */; };
 		8F68590B18AE3BEB0056D91D /* PTSRecommendAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F68590A18AE3BEB0056D91D /* PTSRecommendAPIManager.m */; };
+		8F8EC62A18AFDE7C000D265E /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8EC62918AFDE7C000D265E /* View.xib */; };
+		8F8EC62E18AFE43A000D265E /* PTSMusicStationAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8EC62D18AFE43A000D265E /* PTSMusicStationAPIManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,9 @@
 		8F68590618AE3BA40056D91D /* SCOUtilImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCOUtilImageView.m; sourceTree = "<group>"; };
 		8F68590918AE3BEB0056D91D /* PTSRecommendAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSRecommendAPIManager.h; sourceTree = "<group>"; };
 		8F68590A18AE3BEB0056D91D /* PTSRecommendAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSRecommendAPIManager.m; sourceTree = "<group>"; };
+		8F8EC62918AFDE7C000D265E /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		8F8EC62C18AFE43A000D265E /* PTSMusicStationAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSMusicStationAPIManager.h; sourceTree = "<group>"; };
+		8F8EC62D18AFE43A000D265E /* PTSMusicStationAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSMusicStationAPIManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +268,8 @@
 		8F6858FF18AE27510056D91D /* MusicControlView */ = {
 			isa = PBXGroup;
 			children = (
+				8F8EC62B18AFE3F5000D265E /* Model */,
+				8F8EC62818AFDE5D000D265E /* View */,
 				8F6858D518AE216D0056D91D /* PTSViewController.h */,
 				8F6858D618AE216D0056D91D /* PTSViewController.m */,
 			);
@@ -296,6 +303,23 @@
 			children = (
 				8F68590918AE3BEB0056D91D /* PTSRecommendAPIManager.h */,
 				8F68590A18AE3BEB0056D91D /* PTSRecommendAPIManager.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8F8EC62818AFDE5D000D265E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8F8EC62918AFDE7C000D265E /* View.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		8F8EC62B18AFE3F5000D265E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8F8EC62C18AFE43A000D265E /* PTSMusicStationAPIManager.h */,
+				8F8EC62D18AFE43A000D265E /* PTSMusicStationAPIManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -383,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F6858D918AE216D0056D91D /* Images.xcassets in Resources */,
+				8F8EC62A18AFDE7C000D265E /* View.xib in Resources */,
 				8F6858CB18AE216C0056D91D /* InfoPlist.strings in Resources */,
 				410568EE18AE8EDF00CDBFEF /* PTSRecommendArtworkView.xib in Resources */,
 				8F6858D418AE216D0056D91D /* Main.storyboard in Resources */,
@@ -449,6 +474,7 @@
 				8F6858F918AE271A0056D91D /* PTSRecommendViewController.m in Sources */,
 				41AE376718AF51C1008277CB /* PTSMusicDataModel.m in Sources */,
 				410568EC18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m in Sources */,
+				8F8EC62E18AFE43A000D265E /* PTSMusicStationAPIManager.m in Sources */,
 				41AE376118AF2F70008277CB /* PTSSlideViewController.m in Sources */,
 				410568E318AE7FC900CDBFEF /* StationManager.m in Sources */,
 			);
