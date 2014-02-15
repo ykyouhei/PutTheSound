@@ -48,18 +48,6 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0M-3B-VBA">
-                                        <rect key="frame" x="123" y="114" width="80" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Pause">
-                                            <color key="titleColor" red="0.65062953170000004" green="0.4101126424" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="didPushPlayButton:" destination="u3I-pd-yfk" eventType="touchUpInside" id="JuN-HS-RcY"/>
-                                        </connections>
-                                    </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8fh-0X-siX">
                                         <rect key="frame" x="15" y="15" width="7" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -111,7 +99,6 @@
                         <outlet property="carousel" destination="hV3-j1-InB" id="v3G-pB-Jwr"/>
                         <outlet property="detailLabel" destination="1aU-9c-8Ee" id="ZdI-Wi-8a2"/>
                         <outlet property="mainLabel" destination="fJ0-ox-KkT" id="I0P-ON-nL6"/>
-                        <outlet property="playButton" destination="h0M-3B-VBA" id="9qr-f8-bFo"/>
                         <outlet property="toolView" destination="L5r-Ng-UW3" id="FPu-XJ-zho"/>
                     </connections>
                 </viewController>
