@@ -40,6 +40,8 @@
 		8F68590B18AE3BEB0056D91D /* PTSRecommendAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F68590A18AE3BEB0056D91D /* PTSRecommendAPIManager.m */; };
 		8F8EC62A18AFDE7C000D265E /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8EC62918AFDE7C000D265E /* View.xib */; };
 		8F8EC62E18AFE43A000D265E /* PTSMusicStationAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8EC62D18AFE43A000D265E /* PTSMusicStationAPIManager.m */; };
+		8F8EC63218AFFAA9000D265E /* PTSCrossingMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8EC63118AFFAA9000D265E /* PTSCrossingMusicViewController.m */; };
+		8F8EC63618AFFE47000D265E /* PTSCrossingMusicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8EC63518AFFE47000D265E /* PTSCrossingMusicManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +106,10 @@
 		8F8EC62918AFDE7C000D265E /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		8F8EC62C18AFE43A000D265E /* PTSMusicStationAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSMusicStationAPIManager.h; sourceTree = "<group>"; };
 		8F8EC62D18AFE43A000D265E /* PTSMusicStationAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSMusicStationAPIManager.m; sourceTree = "<group>"; };
+		8F8EC63018AFFAA9000D265E /* PTSCrossingMusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSCrossingMusicViewController.h; sourceTree = "<group>"; };
+		8F8EC63118AFFAA9000D265E /* PTSCrossingMusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSCrossingMusicViewController.m; sourceTree = "<group>"; };
+		8F8EC63418AFFE47000D265E /* PTSCrossingMusicManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSCrossingMusicManager.h; sourceTree = "<group>"; };
+		8F8EC63518AFFE47000D265E /* PTSCrossingMusicManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSCrossingMusicManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +206,7 @@
 		8F6858C618AE216C0056D91D /* PutTheSound */ = {
 			isa = PBXGroup;
 			children = (
+				8F8EC62F18AFFA3A000D265E /* CrossingMusicTable */,
 				41AE376418AF50FF008277CB /* Model */,
 				41AE375E18AF2F32008277CB /* SlideController */,
 				8F68590418AE3B990056D91D /* Util */,
@@ -323,6 +330,25 @@
 			children = (
 				8F8EC62C18AFE43A000D265E /* PTSMusicStationAPIManager.h */,
 				8F8EC62D18AFE43A000D265E /* PTSMusicStationAPIManager.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8F8EC62F18AFFA3A000D265E /* CrossingMusicTable */ = {
+			isa = PBXGroup;
+			children = (
+				8F8EC63318AFFE1D000D265E /* Model */,
+				8F8EC63018AFFAA9000D265E /* PTSCrossingMusicViewController.h */,
+				8F8EC63118AFFAA9000D265E /* PTSCrossingMusicViewController.m */,
+			);
+			name = CrossingMusicTable;
+			sourceTree = "<group>";
+		};
+		8F8EC63318AFFE1D000D265E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8F8EC63418AFFE47000D265E /* PTSCrossingMusicManager.h */,
+				8F8EC63518AFFE47000D265E /* PTSCrossingMusicManager.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -470,6 +496,7 @@
 				8F6858D718AE216D0056D91D /* PTSViewController.m in Sources */,
 				41AE378A18AF7566008277CB /* UIImage+ImageEffects.m in Sources */,
 				8F68590B18AE3BEB0056D91D /* PTSRecommendAPIManager.m in Sources */,
+				8F8EC63218AFFAA9000D265E /* PTSCrossingMusicViewController.m in Sources */,
 				8F68590718AE3BA40056D91D /* SCOUtilImageView.m in Sources */,
 				8F68590318AE29850056D91D /* UIColor+Hex.m in Sources */,
 				8F6858FC18AE272D0056D91D /* PTSPlayListViewController.m in Sources */,
@@ -477,6 +504,7 @@
 				8F6858CD18AE216D0056D91D /* main.m in Sources */,
 				8F6858F918AE271A0056D91D /* PTSRecommendViewController.m in Sources */,
 				41AE376718AF51C1008277CB /* PTSMusicDataModel.m in Sources */,
+				8F8EC63618AFFE47000D265E /* PTSCrossingMusicManager.m in Sources */,
 				410568EC18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m in Sources */,
 				8F8EC62E18AFE43A000D265E /* PTSMusicStationAPIManager.m in Sources */,
 				41AE376118AF2F70008277CB /* PTSSlideViewController.m in Sources */,

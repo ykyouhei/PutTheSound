@@ -344,7 +344,7 @@
     //ブラー用
     UIToolbar *toolBar = [UIToolbar new];
     toolBar.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height / 2.0f);
-    toolBar.alpha = 1.0f;
+    toolBar.alpha = 0.99f;
     
     //つまみ
     UIImage *image = [UIImage imageNamed:@"pull.png"];
