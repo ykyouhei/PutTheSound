@@ -15,6 +15,7 @@
 		41AE376118AF2F70008277CB /* PTSSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AE376018AF2F70008277CB /* PTSSlideViewController.m */; };
 		41AE376318AF44E7008277CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41AE376218AF44E7008277CB /* QuartzCore.framework */; };
 		41AE376718AF51C1008277CB /* PTSMusicDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AE376618AF51C1008277CB /* PTSMusicDataModel.m */; };
+		41AE378A18AF7566008277CB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AE378918AF7566008277CB /* UIImage+ImageEffects.m */; };
 		50B83DAF02EB4268B9912154 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABD9E847C314E028B0C1ACC /* libPods.a */; };
 		8F6858C118AE216C0056D91D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C018AE216C0056D91D /* Foundation.framework */; };
 		8F6858C318AE216C0056D91D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C218AE216C0056D91D /* CoreGraphics.framework */; };
@@ -64,6 +65,8 @@
 		41AE376218AF44E7008277CB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		41AE376518AF51C1008277CB /* PTSMusicDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSMusicDataModel.h; sourceTree = "<group>"; };
 		41AE376618AF51C1008277CB /* PTSMusicDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSMusicDataModel.m; sourceTree = "<group>"; };
+		41AE378818AF7566008277CB /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		41AE378918AF7566008277CB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		8F6858BD18AE216C0056D91D /* PutTheSound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PutTheSound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F6858C018AE216C0056D91D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8F6858C218AE216C0056D91D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -269,6 +272,8 @@
 		8F68590018AE29710056D91D /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				41AE378818AF7566008277CB /* UIImage+ImageEffects.h */,
+				41AE378918AF7566008277CB /* UIImage+ImageEffects.m */,
 				8F68590118AE29850056D91D /* UIColor+Hex.h */,
 				8F68590218AE29850056D91D /* UIColor+Hex.m */,
 			);
@@ -434,6 +439,7 @@
 			files = (
 				410568E818AE84CF00CDBFEF /* PTSRecommendCFViewController.m in Sources */,
 				8F6858D718AE216D0056D91D /* PTSViewController.m in Sources */,
+				41AE378A18AF7566008277CB /* UIImage+ImageEffects.m in Sources */,
 				8F68590B18AE3BEB0056D91D /* PTSRecommendAPIManager.m in Sources */,
 				8F68590718AE3BA40056D91D /* SCOUtilImageView.m in Sources */,
 				8F68590318AE29850056D91D /* UIColor+Hex.m in Sources */,

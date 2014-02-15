@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <iCarousel/iCarousel.h>
+#import <QuartzCore/QuartzCore.h>
 
 @class PTSSlideViewController;
 

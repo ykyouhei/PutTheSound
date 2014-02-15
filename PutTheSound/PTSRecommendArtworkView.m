@@ -38,7 +38,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    self.layer.shadowOpacity = 1.0; // 濃さを指定
+    self.layer.shadowOpacity = 0.7; // 濃さを指定
     self.layer.shadowRadius = 10.0f;
     self.layer.shadowOffset = CGSizeMake(0.0, 0.0); // 影までの距離を指定
 }

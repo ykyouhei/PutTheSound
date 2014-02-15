@@ -10,6 +10,7 @@
 #import "PTSPlayListViewController.h"
 #import "PTSSlideViewController.h"
 #import "PTSMusicDataModel.h"
+#import "UIImage+ImageEffects.h"
 
 @interface PTSViewController ()
 @property (weak, nonatomic) IBOutlet iCarousel *carousel;
@@ -17,10 +18,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *mainLabel;
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) IBOutlet UIView *toolView;
+
 @property (nonatomic) MPMusicPlayerController *player;
 @property (nonatomic) BOOL isPlaying;
 
 @property (weak, nonatomic) PTSMusicDataModel *dataModel;
+
 @end
 
 @implementation PTSViewController
@@ -35,6 +39,16 @@
     self.carousel.delegate = self;
     self.carousel.type = 0;
     self.carousel.vertical = YES;
+    
+    CAGradientLayer *pageGradient = [CAGradientLayer layer];
+    pageGradient.frame = self.toolView.bounds;
+    pageGradient.colors =
+    [NSArray arrayWithObjects:
+     // 赤から黒へグラデーションします。
+     (id)[UIColor colorWithWhite:0.0 alpha:0.9].CGColor,
+     (id)[UIColor colorWithWhite:0.0 alpha:0.6].CGColor,
+     (id)[UIColor colorWithWhite:0.0 alpha:0.05].CGColor, nil];
+    [self.toolView.layer insertSublayer:pageGradient atIndex:0];
     
     self.player = [MPMusicPlayerController iPodMusicPlayer];
 }
@@ -114,6 +128,11 @@
     }
 }
 
+- (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel
+{
+    MPMediaItemArtwork *artwork = self.dataModel.playListSongs[self.dataModel.sectionPlayList[carousel.currentItemIndex]][0][@"ARTWORK"];
+    self.backgroundImageView.image = [[artwork imageWithSize:self.backgroundImageView.frame.size] applyLightEffect];
+}
 
 /***************************************************/
 #pragma mark - IBAction
