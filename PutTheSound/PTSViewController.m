@@ -48,6 +48,8 @@
     self.carousel.type = 0;
     self.carousel.vertical = YES;
     
+    
+    
 //    CAGradientLayer *pageGradient = [CAGradientLayer layer];
 //    pageGradient.frame = self.toolView.bounds;
 //    pageGradient.colors =
@@ -182,6 +184,12 @@
     }
     
     MPMediaItemArtwork *artwork = self.dataModel.playListSongs[self.dataModel.sectionPlayList[carousel.currentItemIndex]][0][@"ARTWORK"];
+    
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.3f;
+    transition.type = kCATransitionFade;
+    
+    [self.backgroundImageView.layer addAnimation:transition forKey:nil];
     self.backgroundImageView.image = [[artwork imageWithSize:self.backgroundImageView.frame.size] applyLightEffect];
 }
 
@@ -189,13 +197,58 @@
 #pragma mark - IBAction
 /***************************************************/
 - (IBAction)rightSwipeHandler:(id)sender {
-    [self.player skipToPreviousItem];
-    [self p_updateLabel];
+    if (self.playingAlbumIndex != self.carousel.currentItemIndex) {
+        return;
+    }
+    
+    PTSRecommendArtworkView *view = (PTSRecommendArtworkView *)[self.carousel currentItemView];
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect frame = view.frame;
+        frame.origin.x += 20;
+        view.frame = frame;
+        
+        frame.origin.x -= 20;
+        view.frame = frame;
+        
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self.player skipToPreviousItem];
+            [self p_updateLabel];
+        }
+    }];
+    
 }
 - (IBAction)leftSwipeHander:(id)sender {
-    [self.player skipToNextItem];
-    [self p_updateLabel];
+    if (self.playingAlbumIndex != self.carousel.currentItemIndex) {
+        return;
+    }
+    
+    PTSRecommendArtworkView *view = (PTSRecommendArtworkView *)[self.carousel currentItemView];
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect frame = view.frame;
+        frame.origin.x -= 20;
+        view.frame = frame;
+        
+        frame.origin.x += 20;
+        view.frame = frame;
+        
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self.player skipToNextItem];
+            [self p_updateLabel];
+        }
+    }];
 }
+
+- (IBAction)tapNowHandler:(id)sender
+{
+    if (self.playingAlbumIndex == -1) {
+        return;
+    }
+    
+    [self.carousel scrollToItemAtIndex:self.playingAlbumIndex duration:0.1];
+}
+
 
 - (IBAction)didPushOpenRecommend:(id)sender {
     if (self.slideVC.isClosed) {
