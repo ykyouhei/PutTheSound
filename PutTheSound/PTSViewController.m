@@ -41,28 +41,41 @@
     }
     else{
         self.playButton.hidden = NO;
-        
+        /*
         NSDictionary *songDic = @{@"ID":[song valueForProperty: MPMediaItemPropertyPersistentID],
                                   @"TITLE":[song valueForProperty: MPMediaItemPropertyTitle],
                                   @"ARTIST":[song valueForProperty: MPMediaItemPropertyArtist],
                                   @"ALUBUMTITLE":[song valueForProperty: MPMediaItemPropertyAlbumTitle],
                                   @"ARTWORK":[song valueForProperty: MPMediaItemPropertyArtwork]};
         
+         MPMediaQuery *songQuery = [MPMediaQuery songsQuery];
+         NSNumber *persistentId = songDic[@"ID"];
+         MPMediaPropertyPredicate *predicate = [MPMediaPropertyPredicate predicateWithValue:persistentId forProperty:MPMediaItemPropertyPersistentID];
+         [songQuery addFilterPredicate:predicate];
+         [self.player setQueueWithQuery:songQuery];
+         */
         
-        MPMediaQuery *songQuery = [MPMediaQuery songsQuery];
-        NSNumber *persistentId = songDic[@"ID"];
-        MPMediaPropertyPredicate *predicate = [MPMediaPropertyPredicate predicateWithValue:persistentId forProperty:MPMediaItemPropertyPersistentID];
-        [songQuery addFilterPredicate:predicate];
         
-        [self.player setQueueWithQuery:songQuery];
+        
+        //　プレイリストでグループ化するクエリを生成
+        MPMediaQuery *query = [MPMediaQuery albumsQuery];
+        //　曲の一覧を取得
+        NSArray *playlists = query.collections;
+        
+        //　全てのグループについてプレイリスト名を比較
+        for (MPMediaItemCollection *playlist in playlists) {
+            
+            if([[playlist.items[0] valueForProperty: MPMediaItemPropertyAlbumTitle] isEqualToString:[song valueForProperty:MPMediaItemPropertyAlbumTitle]]){
+                [self.player setQueueWithItemCollection:playlist];
+                break;
+            }
+        }
+        
         [self.player play];
         [self.playButton setTitle:@"Pause" forState:UIControlStateNormal];
         _isPlaying = YES;
         
-        self.mainLabel.text = songDic[@"TITLE"];
-        self.detailLabel.text = songDic[@"ALUBUMTITLE"];
-        MPMediaItemArtwork *artwork =  songDic[@"ARTWORK"];
-        self.imageView.image = [artwork imageWithSize:CGSizeMake(320.0f, 320.0f)];
+        [self p_updateLabel];
     }
 }
 
@@ -75,6 +88,14 @@
 #pragma mark - IBAction
 - (IBAction)didPushPlayButton:(id)sender {
     [self p_setUpButton];
+}
+- (IBAction)didPushBackButton:(id)sender {
+    [self.player skipToPreviousItem];
+    [self p_updateLabel];
+}
+- (IBAction)didPushNextButton:(id)sender {
+    [self.player skipToNextItem];
+    [self p_updateLabel];
 }
 
 #pragma mark - PrivateMethods
@@ -99,17 +120,29 @@
     }
 }
 
+- (void)p_updateLabel {
+    MPMediaItem *song = [self.player nowPlayingItem];
+    NSDictionary *songDic = @{@"ID":[song valueForProperty: MPMediaItemPropertyPersistentID],
+                              @"TITLE":[song valueForProperty: MPMediaItemPropertyTitle],
+                              @"ARTIST":[song valueForProperty: MPMediaItemPropertyArtist],
+                              @"ALUBUMTITLE":[song valueForProperty: MPMediaItemPropertyAlbumTitle],
+                              @"ARTWORK":[song valueForProperty: MPMediaItemPropertyArtwork]};
+    self.mainLabel.text = songDic[@"TITLE"];
+    self.detailLabel.text = songDic[@"ALUBUMTITLE"];
+    MPMediaItemArtwork *artwork =  songDic[@"ARTWORK"];
+    self.imageView.image = [artwork imageWithSize:CGSizeMake(320.0f, 320.0f)];
+}
 
- #pragma mark - Navigation
- 
- // In a story board-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
-     if([[segue identifier] isEqualToString:@"ControlViewToPlayListView"]){
-         PTSPlayListViewController *nextViewController = [segue destinationViewController];
-         nextViewController.player = _player;
-     }
- }
+#pragma mark - Navigation
+
+// In a story board-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    if([[segue identifier] isEqualToString:@"ControlViewToPlayListView"]){
+        PTSPlayListViewController *nextViewController = [segue destinationViewController];
+        nextViewController.player = _player;
+    }
+}
 
 @end
