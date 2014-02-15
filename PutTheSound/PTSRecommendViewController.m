@@ -8,6 +8,7 @@
 
 #import "PTSRecommendViewController.h"
 #import "PTSRecommendArtworkView.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface PTSRecommendViewController ()
 @property (nonatomic) NSArray *recommendItems;
@@ -110,25 +111,20 @@
     
     SCOUtilImageView *imageView = (SCOUtilImageView*)[cell viewWithTag:100];
     imageView.delegate = self;
+    imageView.songUrl = _recommendItems[indexPath.row][@"previewUrl"];
     
     // 画像取得（UIImage+AFNetworking）
-    /*
+    __weak SCOUtilImageView *weakImageView = imageView;
     NSURL *url = [NSURL URLWithString:_recommendItems[indexPath.row][@"artworkUrl100"]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    __weak PTSRecommendArtworkView *weakView = (PTSRecommendArtworkView *)imageView;
-    [(PTSRecommendArtworkView *)imageView.artworkImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        if (weakView) {
-            weakView.artworkImageView.image = image;
-            [weakView setNeedsLayout];
+    [imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        if (weakImageView) {
+            weakImageView.image = image;
+            [self p_setUpLabelWithImageView:weakImageView isPlaying:YES];
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-    }];*/
+    }];
 
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_recommendItems[indexPath.row][@"artworkUrl100"]]]];
-    imageView.image = image;
-    imageView.songUrl = _recommendItems[indexPath.row][@"previewUrl"];
-    [self p_setUpLabelWithImageView:imageView isPlaying:YES];
-    
     return cell;
 }
 

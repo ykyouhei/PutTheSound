@@ -10,6 +10,7 @@
 #import "PTSPlayListViewController.h"
 #import "PTSSlideViewController.h"
 #import "PTSMusicDataModel.h"
+#import "PTSRecommendArtworkView.h"
 #import "UIImage+ImageEffects.h"
 
 @interface PTSViewController ()
@@ -17,11 +18,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UILabel *mainLabel;
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
-@property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UIView *toolView;
 
 @property (nonatomic) MPMusicPlayerController *player;
 @property (nonatomic) BOOL isPlaying;
+@property (nonatomic) NSInteger playingAlbumIndex;
 
 @property (weak, nonatomic) PTSMusicDataModel *dataModel;
 
@@ -33,9 +34,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.playingAlbumIndex = -1;
     self.dataModel = [PTSMusicDataModel sharedManager];
     
-    self.carousel.dataSource = self.dataModel;
+    self.carousel.dataSource = self;
     self.carousel.delegate = self;
     self.carousel.type = 0;
     self.carousel.vertical = YES;
@@ -58,6 +60,30 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+/***************************************************/
+#pragma mark - iCarouselDataSource
+/***************************************************/
+
+- (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
+{
+    return self.dataModel.sectionPlayList.count;
+}
+
+- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(PTSRecommendArtworkView *)view
+{
+    //create new view if no view is available for recycling
+    if (view == nil) {
+        view = [PTSRecommendArtworkView instanceFromNib];
+    }
+    
+    view.mainLabel.text = self.dataModel.sectionPlayList[index];
+    MPMediaItemArtwork *artwork = self.dataModel.playListSongs[self.dataModel.sectionPlayList[index]][0][@"ARTWORK"];
+    view.artworkImageView.image = [artwork imageWithSize:CGSizeMake(220.0f, 220.0f)];
+    view.stateImageView.image = self.playingAlbumIndex == index ? [UIImage imageNamed:@"stop"] : [UIImage imageNamed:@"play"];
+    
+    return view;
+}
 
 
 /***************************************************/
@@ -82,9 +108,21 @@
         }
     }
     
-    [self.player play];
-    [self.playButton setTitle:@"Pause" forState:UIControlStateNormal];
-    _isPlaying = YES;
+    
+    PTSRecommendArtworkView *view = (PTSRecommendArtworkView *)[self.carousel itemViewAtIndex:index];
+    view.stateImageView.image = [UIImage imageNamed:@"stop"];
+    
+    if (index == self.playingAlbumIndex) {
+        [self.player pause];
+        view.stateImageView.image = [UIImage imageNamed:@"play"];
+        _isPlaying = NO;
+        _playingAlbumIndex = -1;
+    } else {
+        [self.player play];
+        view.stateImageView.image = [UIImage imageNamed:@"stop"];
+        _isPlaying = YES;
+        _playingAlbumIndex = index;
+    }
     
     [self p_updateLabel];
 }
@@ -149,10 +187,6 @@
     [self p_updateLabel];
 }
 
-- (IBAction)didPushPlayButton:(id)sender {
-    [self p_setUpButton];
-}
-
 - (IBAction)didPushOpenRecommend:(id)sender {
     if (self.slideVC.isClosed) {
         [self.slideVC shouldOpenLeft];
@@ -177,23 +211,16 @@
 - (void)p_setUpButton {
     if(_isPlaying){
         [self.player pause];
-        [self.playButton setTitle:@"Play" forState:UIControlStateNormal];
+//        [self.playButton setTitle:@"Play" forState:UIControlStateNormal];
         _isPlaying = NO;
     }
     else{
         [self.player play];
-        [self.playButton setTitle:@"Pause" forState:UIControlStateNormal];
+//        [self.playButton setTitle:@"Pause" forState:UIControlStateNormal];
         _isPlaying = YES;
     }
 }
-- (void)p_showPlaylistInfo {
-    NSLog(@"プレイリストを表示する");
-    MPMediaQuery *query = [MPMediaQuery playlistsQuery];
-    for( MPMediaPlaylist *plist in [query collections] )
-    {
-        NSLog(@"%@", [plist valueForProperty:MPMediaPlaylistPropertyName]);
-    }
-}
+
 
 - (void)p_updateLabel {
     if(_isPlaying){

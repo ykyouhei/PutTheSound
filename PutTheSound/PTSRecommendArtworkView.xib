@@ -34,6 +34,10 @@
                     <color key="shadowColor" cocoaTouchSystemColor="darkTextColor"/>
                     <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="play" translatesAutoresizingMaskIntoConstraints="NO" id="c9w-DC-8bX">
+                    <rect key="frame" x="77" y="76" width="67" height="67"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -47,7 +51,11 @@
                 <outlet property="artworkImageView" destination="llw-iH-nAX" id="FRU-V1-Q72"/>
                 <outlet property="detailLabel" destination="Fm1-fy-Mx4" id="2fe-VZ-jQU"/>
                 <outlet property="mainLabel" destination="BX6-zl-Rgi" id="mOE-zC-NMv"/>
+                <outlet property="stateImageView" destination="c9w-DC-8bX" id="yXh-gG-ekj"/>
             </connections>
         </view>
     </objects>
+    <resources>
+        <image name="play" width="67" height="67"/>
+    </resources>
 </document>
