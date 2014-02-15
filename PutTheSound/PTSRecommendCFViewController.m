@@ -85,8 +85,8 @@
         view = [PTSRecommendArtworkView instanceFromNib];
     }
     
-    view.artworkImageView.delegate = self;
-    view.artworkImageView.songUrl = _recommendItems[index][@"previewUrl"];
+//    view.artworkImageView.delegate = self;
+//    view.artworkImageView.songUrl = _recommendItems[index][@"previewUrl"];
     view.titleLabel.text = _recommendItems[index][@"trackName"];
     [self p_setUpLabelWithImageView:((PTSRecommendArtworkView *)view).artworkImageView isPlaying:YES];
     
