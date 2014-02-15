@@ -8,6 +8,7 @@
 
 #import "PTSViewController.h"
 #import "PTSPlayListViewController.h"
+#import "PTSSlideViewController.h"
 
 @interface PTSViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -96,6 +97,22 @@
 - (IBAction)didPushNextButton:(id)sender {
     [self.player skipToNextItem];
     [self p_updateLabel];
+}
+
+- (IBAction)didPushOpenRecommend:(id)sender {
+    if (self.slideVC.isClosed) {
+        [self.slideVC shouldOpenLeft];
+    } else {
+        [self.slideVC shouldClose];
+    }
+}
+
+- (IBAction)didPushOpenSettings:(id)sender {
+    if (self.slideVC.isClosed) {
+        [self.slideVC shouldOpenRight];
+    } else {
+        [self.slideVC shouldClose];
+    }
 }
 
 #pragma mark - PrivateMethods
