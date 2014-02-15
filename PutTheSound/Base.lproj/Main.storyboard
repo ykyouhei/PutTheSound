@@ -66,7 +66,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="jRI-uT-9i9" kind="modal" id="OpZ-aM-4l4"/>
+                                    <segue destination="7j5-vg-Nsx" kind="modal" id="gtZ-J2-4qD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -157,6 +157,128 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ffb-Z8-0Y4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="378" y="87"/>
+        </scene>
+        <!--RecommendCF View Controller-->
+        <scene sceneID="fSy-QU-o4N">
+            <objects>
+                <viewController id="7j5-vg-Nsx" customClass="PTSRecommendCFViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dk1-2h-UQr"/>
+                        <viewControllerLayoutGuide type="bottom" id="wDU-wP-8UX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bgY-Zw-sO4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BMm-d9-5UQ" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="20" width="320" height="518"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="7j5-vg-Nsx" id="cao-qq-xYT"/>
+                                    <outlet property="delegate" destination="7j5-vg-Nsx" id="zJP-sk-TTp"/>
+                                </connections>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8Mf-95-HVQ">
+                                <rect key="frame" x="8" y="30" width="304" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="eqH-vI-yCt"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="0" width="30"/>
+                                    <segment title="1"/>
+                                    <segment title="2"/>
+                                    <segment title="3"/>
+                                    <segment title="4"/>
+                                    <segment title="5"/>
+                                    <segment title="6"/>
+                                    <segment title="7"/>
+                                    <segment title="8"/>
+                                    <segment title="9"/>
+                                    <segment title="10"/>
+                                </segments>
+                                <connections>
+                                    <action selector="onValueChangedType:" destination="7j5-vg-Nsx" eventType="valueChanged" id="u7g-vI-d6y"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="a3K-Sb-c4g">
+                                <rect key="frame" x="99" y="500" width="123" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="D97-rq-run"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Horizon"/>
+                                    <segment title="Vertical"/>
+                                </segments>
+                                <connections>
+                                    <action selector="onValueChangedOrientation:" destination="7j5-vg-Nsx" eventType="valueChanged" id="tca-Mr-6vu"/>
+                                </connections>
+                            </segmentedControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asc-Af-XIw">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="538"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" tag="300" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="iyO-Mg-8ac">
+                                        <rect key="frame" x="142" y="251" width="37" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.18839723389999999" green="0.18839723389999999" blue="0.18839723389999999" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="iyO-Mg-8ac" secondAttribute="centerY" id="aZr-Nd-s4b"/>
+                                    <constraint firstAttribute="centerX" secondItem="iyO-Mg-8ac" secondAttribute="centerX" id="msM-gc-v65"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRf-DT-NNy">
+                                <rect key="frame" x="0.0" y="538" width="320" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="eqm-6s-9Qs"/>
+                                </constraints>
+                                <state key="normal" title="戻る">
+                                    <color key="titleColor" red="1" green="0.66888016650000004" blue="0.9567376514" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didPushReturnButton:" destination="xBy-yG-yqn" eventType="touchUpInside" id="LxX-RU-36W"/>
+                                    <action selector="didPushReturnButton:" destination="7j5-vg-Nsx" eventType="touchUpInside" id="dUb-L2-iBg"/>
+                                    <action selector="didPushReturnButton:" destination="jRI-uT-9i9" eventType="touchUpInside" id="qcm-aY-ZnR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eRf-DT-NNy" firstAttribute="leading" secondItem="bgY-Zw-sO4" secondAttribute="leading" id="0qf-jf-YtO"/>
+                            <constraint firstAttribute="trailing" secondItem="BMm-d9-5UQ" secondAttribute="trailing" id="1wi-GT-8h0"/>
+                            <constraint firstItem="eRf-DT-NNy" firstAttribute="top" secondItem="a3K-Sb-c4g" secondAttribute="bottom" constant="10" id="B64-fg-wel"/>
+                            <constraint firstItem="8Mf-95-HVQ" firstAttribute="top" secondItem="dk1-2h-UQr" secondAttribute="bottom" constant="10" id="BYD-16-atU"/>
+                            <constraint firstAttribute="trailing" secondItem="eRf-DT-NNy" secondAttribute="trailing" id="IZ3-YR-x49"/>
+                            <constraint firstAttribute="trailing" secondItem="8Mf-95-HVQ" secondAttribute="trailing" constant="8" id="KR5-I8-cQq"/>
+                            <constraint firstItem="8Mf-95-HVQ" firstAttribute="leading" secondItem="bgY-Zw-sO4" secondAttribute="leading" constant="8" id="LsP-PJ-YLz"/>
+                            <constraint firstAttribute="centerX" secondItem="a3K-Sb-c4g" secondAttribute="centerX" id="MZQ-3M-BIl"/>
+                            <constraint firstItem="eRf-DT-NNy" firstAttribute="top" secondItem="asc-Af-XIw" secondAttribute="bottom" id="U7Z-Rm-Vqv"/>
+                            <constraint firstItem="asc-Af-XIw" firstAttribute="leading" secondItem="bgY-Zw-sO4" secondAttribute="leading" id="VWQ-As-T67"/>
+                            <constraint firstAttribute="trailing" secondItem="asc-Af-XIw" secondAttribute="trailing" id="hV4-aA-7eb"/>
+                            <constraint firstItem="BMm-d9-5UQ" firstAttribute="leading" secondItem="bgY-Zw-sO4" secondAttribute="leading" id="jGu-3h-QLs"/>
+                            <constraint firstItem="wDU-wP-8UX" firstAttribute="top" secondItem="eRf-DT-NNy" secondAttribute="bottom" id="nFd-EM-WuQ"/>
+                            <constraint firstItem="asc-Af-XIw" firstAttribute="top" secondItem="bgY-Zw-sO4" secondAttribute="top" id="qBa-Cj-JIg"/>
+                            <constraint firstItem="eRf-DT-NNy" firstAttribute="top" secondItem="BMm-d9-5UQ" secondAttribute="bottom" id="qNV-aY-aeQ"/>
+                            <constraint firstItem="eRf-DT-NNy" firstAttribute="top" secondItem="asc-Af-XIw" secondAttribute="bottom" id="rH3-2j-XFi"/>
+                            <constraint firstItem="BMm-d9-5UQ" firstAttribute="top" secondItem="dk1-2h-UQr" secondAttribute="bottom" id="txw-Cl-AAQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="2Fg-FN-Zo2"/>
+                    <connections>
+                        <outlet property="carousel" destination="BMm-d9-5UQ" id="9v1-Ix-kuI"/>
+                        <outlet property="indicatorView" destination="asc-Af-XIw" id="R7I-04-YY1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="erX-iw-mp5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="372" y="-1303"/>
         </scene>
         <!--Recommend View Controller-->
         <scene sceneID="FoM-In-eLC">
