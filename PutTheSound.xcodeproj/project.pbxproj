@@ -351,7 +351,7 @@
 				ORGANIZATIONNAME = "Toshiki Chiba";
 				TargetAttributes = {
 					8F6858BC18AE216C0056D91D = {
-						DevelopmentTeam = 6EC83W22VX;
+						DevelopmentTeam = AVWWV46Y77;
 					};
 					8F6858DD18AE216D0056D91D = {
 						TestTargetID = 8F6858BC18AE216C0056D91D;

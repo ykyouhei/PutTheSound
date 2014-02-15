@@ -52,6 +52,7 @@
 //    [self.toolView.layer insertSublayer:pageGradient atIndex:0];
     
     self.player = [MPMusicPlayerController iPodMusicPlayer];
+    self.player.repeatMode = MPMusicRepeatModeAll;
 }
 
 - (void)didReceiveMemoryWarning
