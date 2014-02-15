@@ -114,6 +114,11 @@
     return value;
 }
 
+- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
+{
+    
+}
+
 
 
 #pragma mark - PTSRecommendAPIManagerDelegate
@@ -122,7 +127,6 @@
     dispatch_async(dispatch_get_main_queue(), ^(){
         [self p_indicatorShow:NO];
         [self.carousel reloadData];
-        //[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     });
 }
 
