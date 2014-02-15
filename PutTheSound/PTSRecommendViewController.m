@@ -143,7 +143,6 @@
     if([_selectedStringUrl isEqualToString:stringUrl]){
 
         dispatch_async(dispatch_get_main_queue(), ^(){
-            //[self p_showImageViewIndicator:dictionary[@"object"] show:YES];
             [self p_showRoadingIndicator:dictionary[@"object"] show:YES];
         });
 
@@ -160,7 +159,6 @@
     }
     
     dispatch_async(dispatch_get_main_queue(), ^(){
-        //[self p_showImageViewIndicator:dictionary[@"object"] show:NO];
         [self p_showRoadingIndicator:dictionary[@"object"] show:NO];
     });
     
@@ -171,15 +169,12 @@
             self.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:nil];
             [self.audioPlayer play];
             dispatch_async(dispatch_get_main_queue(), ^(){
-                //[self p_showImageViewIndicator:dictionary[@"object"] show:YES];
                 [self p_showRoadingIndicator:dictionary[@"object"] show:YES];
             });
         }
     }];
     
-    //NSData *data = [NSData dataWithContentsOfURL:url];
-    
-       [self setSelectedStringUrl:stringUrl];
+    [self setSelectedStringUrl:stringUrl];
     [self p_setUpLabelWithImageView:dictionary[@"object"] isPlaying:NO];
 }
 
