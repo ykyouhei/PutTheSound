@@ -14,7 +14,8 @@
 @interface PTSRecommendArtworkView : UIView
 
 @property (weak, nonatomic) IBOutlet UIImageView *artworkImageView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *mainLabel;
+@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 
 + (id)instanceFromNib;
 

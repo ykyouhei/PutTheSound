@@ -56,36 +56,51 @@
 /***************************************************/
 - (void)shouldOpenLeft
 {
-    [self.view sendSubviewToBack:self.settingsView];
-    
     CGRect frame = self.mainView.frame;
     frame.origin.x = self.recommendView.frame.size.width;
     [UIView animateWithDuration:0.2 animations:^{
         self.mainView.frame = frame;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            self.closed = NO;
+        }
     }];
-    self.closed = NO;
 }
 
 - (void)shouldOpenRight
 {
-    [self.view sendSubviewToBack:self.recommendView];
-    
     CGRect frame = self.mainView.frame;
     frame.origin.x = -self.recommendView.frame.size.width;
+    
+    CGRect frame2 = self.recommendView.frame;
+    frame2.origin.x = frame.origin.x;
+    
     [UIView animateWithDuration:0.2 animations:^{
         self.mainView.frame = frame;
+        self.recommendView.frame = frame2;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            self.closed = NO;
+        }
     }];
-    self.closed = NO;
 }
 
 - (void)shouldClose
 {
     CGRect frame = self.mainView.frame;
     frame.origin.x = 0;
+    
+    CGRect frame2 = self.recommendView.frame;
+    frame2.origin.x = 0;
+    
     [UIView animateWithDuration:0.2 animations:^{
         self.mainView.frame = frame;
+        self.recommendView.frame = frame2;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            self.closed = YES;
+        }
     }];
-    self.closed = YES;
 }
 
 @end
