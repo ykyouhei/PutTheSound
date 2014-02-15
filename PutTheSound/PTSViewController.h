@@ -19,7 +19,7 @@
 @class PTSSlideViewController;
 
 @interface PTSViewController : UIViewController
-<iCarouselDelegate, iCarouselDataSource,PTSMusicStationAPIManagerDelegate,SCOUtilImageViewDelegate>
+<iCarouselDelegate, iCarouselDataSource,PTSMusicStationAPIManagerDelegate,SCOUtilImageViewDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, weak) PTSSlideViewController *slideVC;
 
