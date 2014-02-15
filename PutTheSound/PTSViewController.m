@@ -321,11 +321,16 @@
     imageView.frame = CGRectMake((_getView.frame.size.width - image.size.width) / 2.0f,
                                  5.0f, image.size.width, image.size.height);
     
+    //閉じるボタン
+    UIButton *button = [[UIButton alloc] initWithFrame:imageView.frame];
+    button.backgroundColor = [UIColor clearColor];
+    [button addTarget:self action:@selector(p_closeGetView) forControlEvents:UIControlEventTouchUpInside];
+    
     //要素
     UINib *nib = [UINib nibWithNibName:@"View" bundle:nil];
     self.getDetailView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
     CGRect rect = _getDetailView.frame;
-    rect.origin.y = _getView.frame.size.height - _getDetailView.frame.size.height;
+    rect.origin.y = _getView.frame.size.height - _getDetailView.frame.size.height -20.0f;
     _getDetailView.frame = rect;
     
     //角丸
@@ -335,6 +340,7 @@
     toolBar.layer.cornerRadius = 10;
     
     [toolBar addSubview:_getDetailView];
+    [toolBar addSubview:button];
     [toolBar addSubview:imageView];
     [self.getView addSubview:toolBar];
     [self.view addSubview:_getView];
@@ -355,10 +361,10 @@
 }
 
 - (void)p_closeGetView {
-    CGRect frame = self.view.frame;
+    CGRect frame = self.getView.frame;
     frame.origin.y = self.view.frame.size.height;
     
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         self.getView.frame = frame;;
         
     } completion:^(BOOL finished) {
