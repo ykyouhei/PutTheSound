@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <iCarousel/iCarousel.h>
+#import <QuartzCore/QuartzCore.h>
 
 @class PTSSlideViewController;
 
 @interface PTSViewController : UIViewController
+<iCarouselDelegate>
 
 @property (nonatomic, weak) PTSSlideViewController *slideVC;
 

@@ -68,7 +68,7 @@ static PTSMusicDataModel *_sharedInstance;
 
 
 /***************************************************/
-#pragma mark - iCarouselDelegate
+#pragma mark - iCarouselDataSource
 /***************************************************/
 
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
@@ -89,9 +89,6 @@ static PTSMusicDataModel *_sharedInstance;
     
     return view;
 }
-
-
-
 
 
 @end

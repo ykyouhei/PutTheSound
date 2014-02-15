@@ -10,7 +10,8 @@
 #warning "This project uses features only available in iOS SDK 5.0 and later."
 #endif
 
-#ifdef __OBJC__
+#ifdef __OBJ__
     #import <UIKit/UIKit.h>
+    #import "UIImage+ImageEffects.h "
     #import <Foundation/Foundation.h>
 #endif
