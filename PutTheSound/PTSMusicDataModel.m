@@ -67,28 +67,7 @@ static PTSMusicDataModel *_sharedInstance;
 }
 
 
-/***************************************************/
-#pragma mark - iCarouselDataSource
-/***************************************************/
 
-- (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
-{
-    return self.sectionPlayList.count;
-}
-
-- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(PTSRecommendArtworkView *)view
-{
-    //create new view if no view is available for recycling
-    if (view == nil) {
-        view = [PTSRecommendArtworkView instanceFromNib];
-    }
-    
-    view.mainLabel.text = _sectionPlayList[index];
-    MPMediaItemArtwork *artwork = _playListSongs[_sectionPlayList[index]][0][@"ARTWORK"];
-    view.artworkImageView.image = [artwork imageWithSize:CGSizeMake(220.0f, 220.0f)];
-    
-    return view;
-}
 
 
 @end
