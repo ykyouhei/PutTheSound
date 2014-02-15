@@ -12,6 +12,7 @@
     UIView *_loadingView;
     UIActivityIndicatorView *_indicator;
     UIImageView *_playView;
+    UIActivityIndicatorView *_playIndicator;
 }
 
 @end
@@ -50,6 +51,15 @@
         [_playView setCenter:CGPointMake(_loadingView.bounds.size.width / 2, _loadingView.bounds.size.height / 2)];
         
         [self addSubview:_playView];
+        
+        
+        // インジケータ作成
+        _playIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        _playIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+        [_playIndicator setCenter:CGPointMake(_loadingView.bounds.size.width / 2, _loadingView.bounds.size.height / 2)];
+        
+        // ビューに追加
+        [self addSubview:_playIndicator];
         
         /*
         CALayer* subLayer = [CALayer layer];
@@ -91,7 +101,13 @@
     if(self.image){
         [_indicator stopAnimating];
         [_loadingView removeFromSuperview];
-        [_playView setHidden:NO];
+        if(_playIndicator.hidden){
+            [_playView setHidden:NO];
+        }
+        else{
+            [_playView setHidden:YES];
+        }
+
     }
     else {
         [_playView setHidden:YES];
@@ -144,6 +160,36 @@
 - (void)p_setUpPlayView{
     UIImage *image = [UIImage imageNamed:!_isPlaying?@"stop.png":@"play.png"];
     _playView.image = image;
+}
+
+#pragma mark - Public Methods
+- (void)showPlayView:(BOOL)flag {
+    
+    if(flag){
+        _playView.hidden = YES;
+        
+        _playIndicator.hidden = NO;
+        [_playIndicator startAnimating];
+    }
+    else{
+        _playView.hidden = NO;
+        
+        _playIndicator.hidden = YES;
+        [_playIndicator stopAnimating];
+    }
+}
+
+- (void)showPlayIndicatorView:(BOOL)flag {
+    if(flag){
+        _playView.hidden = YES;
+        _playIndicator.hidden = NO;
+        [_playIndicator startAnimating];
+    }
+    else{
+        _playView.hidden = NO;
+        _playIndicator.hidden = YES;
+        [_playIndicator stopAnimating];
+    }
 }
 /*
 // Only override drawRect: if you perform custom drawing.

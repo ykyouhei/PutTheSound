@@ -69,6 +69,23 @@
     [imageView setNeedsLayout];
 }
 
+- (void)p_showImageViewIndicator:(SCOUtilImageView*)imageView show:(BOOL)flag {
+    if(flag){
+        [imageView showPlayView:NO];
+    }
+    else{
+        [imageView showPlayView:YES];
+    }
+}
+
+- (void)p_showRoadingIndicator:(SCOUtilImageView*)imageView show:(BOOL)flag {
+    if(flag){
+        [imageView showPlayIndicatorView:NO];
+    }
+    else{
+        [imageView showPlayIndicatorView:YES];
+    }
+}
 #pragma mark - Table view data source
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
@@ -128,6 +145,12 @@
 -(void)didPushImageViewWithDictionary:(NSDictionary *)dictionary {
     NSString *stringUrl = dictionary[@"songUrl"];
     if([_selectedStringUrl isEqualToString:stringUrl]){
+
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            //[self p_showImageViewIndicator:dictionary[@"object"] show:YES];
+            [self p_showRoadingIndicator:dictionary[@"object"] show:YES];
+        });
+
         if(_audioPlayer.playing){
             [self.audioPlayer pause];
             [self p_setUpLabelWithImageView:dictionary[@"object"] isPlaying:YES];
@@ -139,11 +162,28 @@
             return;
         }
     }
+    
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        //[self p_showImageViewIndicator:dictionary[@"object"] show:NO];
+        [self p_showRoadingIndicator:dictionary[@"object"] show:NO];
+    });
+    
     NSURL *url = [NSURL URLWithString:stringUrl];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:nil];
-    [self.audioPlayer play];
-    [self setSelectedStringUrl:stringUrl];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
+        if (data){
+            self.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:nil];
+            [self.audioPlayer play];
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                //[self p_showImageViewIndicator:dictionary[@"object"] show:YES];
+                [self p_showRoadingIndicator:dictionary[@"object"] show:YES];
+            });
+        }
+    }];
+    
+    //NSData *data = [NSData dataWithContentsOfURL:url];
+    
+       [self setSelectedStringUrl:stringUrl];
     [self p_setUpLabelWithImageView:dictionary[@"object"] isPlaying:NO];
 }
 

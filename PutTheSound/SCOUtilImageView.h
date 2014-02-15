@@ -16,4 +16,6 @@
 @property(strong, nonatomic) NSString *songUrl;
 @property(weak, nonatomic) id<SCOUtilImageViewDelegate>delegate;
 @property(nonatomic) BOOL isPlaying;
+- (void)showPlayView:(BOOL)flag;
+- (void)showPlayIndicatorView:(BOOL)flag;
 @end
