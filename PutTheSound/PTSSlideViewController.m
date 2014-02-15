@@ -32,7 +32,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    self.mainView.layer.shadowOpacity = 0.2; // 濃さを指定
+    self.mainView.layer.shadowOffset = CGSizeMake(10.0, 10.0); // 影までの距離を指定
 }
 
 - (void)didReceiveMemoryWarning
