@@ -42,6 +42,8 @@
     self.carousel.type = 0;
     self.carousel.vertical = YES;
     
+    
+    
 //    CAGradientLayer *pageGradient = [CAGradientLayer layer];
 //    pageGradient.frame = self.toolView.bounds;
 //    pageGradient.colors =
@@ -173,6 +175,12 @@
     }
     
     MPMediaItemArtwork *artwork = self.dataModel.playListSongs[self.dataModel.sectionPlayList[carousel.currentItemIndex]][0][@"ARTWORK"];
+    
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.3f;
+    transition.type = kCATransitionFade;
+    
+    [self.backgroundImageView.layer addAnimation:transition forKey:nil];
     self.backgroundImageView.image = [[artwork imageWithSize:self.backgroundImageView.frame.size] applyLightEffect];
 }
 
