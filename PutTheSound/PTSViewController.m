@@ -24,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 @property (weak, nonatomic) IBOutlet UIView *toolView;
 
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
 @property (nonatomic) MPMusicPlayerController *player;
 @property (nonatomic) BOOL isPlaying;
 @property (nonatomic) NSInteger playingAlbumIndex;
@@ -40,6 +43,8 @@
 @property (nonatomic) NSArray *nearestStations;
 @property (nonatomic) NSString *selectedStationName;
 
+@property (nonatomic) NSDateFormatter *formatter;
+
 @end
 
 @implementation PTSViewController
@@ -48,6 +53,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.formatter = [[NSDateFormatter alloc] init];
+    [self.formatter setDateFormat:@"mm:ss"];
+    
     self.playingAlbumIndex = -1;
     self.dataModel = [PTSMusicDataModel sharedManager];
     
@@ -315,6 +323,15 @@
         
         self.mainLabel.text = songDic[@"TITLE"];
         self.detailLabel.text = songDic[@"ALUBUMTITLE"];
+        
+        MPMediaItem *item = [self.player nowPlayingItem];
+        NSUInteger duration = [[item valueForKey:MPMediaItemPropertyPlaybackDuration] unsignedIntegerValue];
+        
+        // NSDateFormatter を用意します。
+        
+        self.timeLabel.text = [self.formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:duration]];
+        
+
     }
 }
 
