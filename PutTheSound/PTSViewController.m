@@ -13,6 +13,9 @@
 #import "PTSRecommendArtworkView.h"
 #import "UIImage+ImageEffects.h"
 
+#import <AFNetworking/UIImageView+AFNetworking.h>
+
+
 @interface PTSViewController ()
 @property (weak, nonatomic) IBOutlet iCarousel *carousel;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
@@ -25,6 +28,9 @@
 @property (nonatomic) NSInteger playingAlbumIndex;
 
 @property (weak, nonatomic) PTSMusicDataModel *dataModel;
+
+@property (nonatomic) UIView *getView;
+@property (nonatomic) UIView *getDetailView;
 
 @end
 
@@ -55,6 +61,9 @@
     
     self.player = [MPMusicPlayerController iPodMusicPlayer];
     self.player.repeatMode = MPMusicRepeatModeAll;
+    
+    //getView
+    [self p_setUpGetView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -256,6 +265,10 @@
     }
 }
 
+- (IBAction)didPushGetButton:(id)sender {
+    [[PTSMusicStationAPIManager sharedManager] setDelegate:self];
+    [[PTSMusicStationAPIManager sharedManager] getRequest];
+}
 
 
 /***************************************************/
@@ -291,5 +304,107 @@
     }
 }
 
+- (void)p_setUpGetView {
+    //ベース
+    self.getView = [UIView new];
+    self.getView.frame = CGRectMake(0.0f, self.view.frame.size.height, self.view.frame.size.width, self.view.frame.size.height / 2.0f);
+    self.getView.backgroundColor = [UIColor clearColor];
+    
+    //ブラー用
+    UIToolbar *toolBar = [UIToolbar new];
+    toolBar.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height / 2.0f);
+    toolBar.alpha = 1.0f;
+    
+    //つまみ
+    UIImage *image = [UIImage imageNamed:@"pull.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    imageView.frame = CGRectMake((_getView.frame.size.width - image.size.width) / 2.0f,
+                                 5.0f, image.size.width, image.size.height);
+    
+    //要素
+    UINib *nib = [UINib nibWithNibName:@"View" bundle:nil];
+    self.getDetailView = [[nib instantiateWithOwner:self options:nil] objectAtIndex:0];
+    CGRect rect = _getDetailView.frame;
+    rect.origin.y = _getView.frame.size.height - _getDetailView.frame.size.height;
+    _getDetailView.frame = rect;
+    
+    //角丸
+    self.getView.clipsToBounds = YES;
+    self.getView.layer.cornerRadius = 10;
+    toolBar.clipsToBounds = YES;
+    toolBar.layer.cornerRadius = 10;
+    
+    [toolBar addSubview:_getDetailView];
+    [toolBar addSubview:imageView];
+    [self.getView addSubview:toolBar];
+    [self.view addSubview:_getView];
+}
 
+- (void)p_openGetView {
+    CGRect frame = self.getView.frame;
+    frame.origin.y = self.view.frame.size.height - self.getView.frame.size.height;
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.getView.frame = frame;
+    
+    } completion:^(BOOL finished) {
+        if (finished) {
+
+        }
+    }];
+}
+
+- (void)p_closeGetView {
+    CGRect frame = self.view.frame;
+    frame.origin.y = self.view.frame.size.height;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.getView.frame = frame;;
+        
+    } completion:^(BOOL finished) {
+        if (finished) {
+            
+        }
+    }];
+}
+
+- (void)p_updateGetView{
+}
+
+#pragma mark - PTSMusicStationAPIManagerDelegate
+- (void)didFinishLoardWithStationSongObject:(NSArray*)array{
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        
+        //駅名
+        UILabel *stationLabel = (UILabel*)[_getDetailView viewWithTag:10];
+        stationLabel.text = @"六本木";
+
+        //アルバム名
+        UILabel *alubumLabel = (UILabel*)[_getDetailView viewWithTag:30];
+        alubumLabel.text = array[0][@"collectionName"];
+        
+        //曲名
+        UILabel *songLabel = (UILabel*)[_getDetailView viewWithTag:40];
+        songLabel.text = array[0][@"trackName"];
+        //ゲット文言
+
+        //アルバムジャケット
+        SCOUtilImageView *imageView = (SCOUtilImageView*)[_getDetailView viewWithTag:20];
+        imageView.delegate = self;
+        imageView.songUrl = array[0][@"previewUrl"];
+        
+        // 画像取得（UIImage+AFNetworking）
+        __weak SCOUtilImageView *weakImageView = imageView;
+        NSURL *url = [NSURL URLWithString:array[0][@"artworkUrl100"]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        [imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            if (weakImageView) {
+                weakImageView.image = image;
+                [self p_openGetView];
+            }
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        }];
+
+    });
+}
 @end
