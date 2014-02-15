@@ -231,6 +231,16 @@
     }];
 }
 
+- (IBAction)tapNowHandler:(id)sender
+{
+    if (self.playingAlbumIndex == -1) {
+        return;
+    }
+    
+    [self.carousel scrollToItemAtIndex:self.playingAlbumIndex duration:0.1];
+}
+
+
 - (IBAction)didPushOpenRecommend:(id)sender {
     if (self.slideVC.isClosed) {
         [self.slideVC shouldOpenLeft];
