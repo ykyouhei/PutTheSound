@@ -36,13 +36,13 @@ static NSString *const putRequestURL = @"http://www1415uo.sakura.ne.jp/music/Sta
 - (void)getRequest{
     [[StationManager sharedManager] requestNearestStations:^(NSArray *stations, NSError *error) {
         NSString *station = [NSString stringWithFormat:@"%@_%@", stations[0][@"line"], stations[0][@"name"]];
-        station = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+        NSString *Estation = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
                                                                                         NULL,
                                                                                         (CFStringRef)station,
                                                                                         NULL,
                                                                                         (CFStringRef)@"!*'();:@&=+$,/?%#[]",
                                                                                         kCFStringEncodingUTF8 ));
-        NSString *stringUrl = [NSString stringWithFormat:requestURL, station];//[NSString stringWithFormat:@"%@%@",requestURL,@"大江戸線_代々木"];
+        NSString *stringUrl = [NSString stringWithFormat:requestURL, Estation];//[NSString stringWithFormat:@"%@%@",requestURL,@"大江戸線_代々木"];
         NSURL *url = [NSURL URLWithString:stringUrl];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new]
