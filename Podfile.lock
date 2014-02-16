@@ -18,13 +18,16 @@ PODS:
   - AFNetworking/UIKit (2.1.0):
     - AFNetworking/NSURLConnection
   - iCarousel (1.7.6)
+  - OLGhostAlertView (1.7)
 
 DEPENDENCIES:
   - AFNetworking
   - iCarousel (~> 1.7.6)
+  - OLGhostAlertView (~> 1.7)
 
 SPEC CHECKSUMS:
   AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
   iCarousel: e23a26d7ba722215a42144e80adb0dcb59bebc41
+  OLGhostAlertView: 9dc999eea3544d91388d4a6cb225dafd70b421e3
 
 COCOAPODS: 0.29.0
