@@ -113,6 +113,10 @@
     imageView.delegate = self;
     imageView.songUrl = _recommendItems[indexPath.row][@"previewUrl"];
     
+    //DLButton
+    UIButton *downLoadButton = (UIButton*)[cell viewWithTag:900];
+    downLoadButton.tag = indexPath.row;
+    
     // 画像取得（UIImage+AFNetworking）
     __weak SCOUtilImageView *weakImageView = imageView;
     NSString *urlString = [_recommendItems[indexPath.row][@"artworkUrl100"] stringByReplacingOccurrencesOfString:@"100x100" withString:@"200x200"];
@@ -182,6 +186,12 @@
 #pragma mark - IBAction
 - (IBAction)didPushReturnButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)didPushDownLoadButton:(id)sender {
+    NSString *stringUrl = _recommendItems[((UIButton*)sender).tag][@"trackViewUrl"];
+    // 文字列を置換
+    NSString *result = [stringUrl stringByReplacingOccurrencesOfString:@"https" withString:@"itmss"];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:result]];
 }
 
 @end
