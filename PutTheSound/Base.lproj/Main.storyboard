@@ -461,6 +461,16 @@
                                                     <rect key="frame" x="10" y="10" width="260" height="170"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
+                                                <button opaque="NO" tag="900" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ni-Ho-ofJ">
+                                                    <rect key="frame" x="239" y="135" width="21" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="download">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="didPushDownLoadButton:" destination="jRI-uT-9i9" eventType="touchUpInside" id="W5m-DG-9Ox"/>
+                                                    </connections>
+                                                </button>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="500" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="VHn-ft-LcT">
                                                     <rect key="frame" x="20" y="130" width="240" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -586,6 +596,7 @@
     </scenes>
     <resources>
         <image name="back" width="17" height="25"/>
+        <image name="download" width="21" height="25"/>
         <image name="list" width="35" height="37"/>
         <image name="next" width="17" height="25"/>
         <image name="people_on" width="37" height="29"/>
