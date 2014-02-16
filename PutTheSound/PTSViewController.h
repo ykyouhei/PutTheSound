@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <iCarousel/iCarousel.h>
 #import <QuartzCore/QuartzCore.h>
+#import <OLGhostAlertView/OLGhostAlertView.h>
 
 #import "PTSMusicStationAPIManager.h"
 #import "SCOUtilImageView.h"
