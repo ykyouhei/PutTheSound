@@ -288,7 +288,31 @@
 }
 
 - (IBAction)didPushPutButton:(id)sender {
+    if (!self.isPlaying) {
+        OLGhostAlertView *ghastly = [[OLGhostAlertView alloc] initWithTitle:nil
+                                                                    message:@"曲が選択されていません"];
+        [ghastly show];
+        return;
+    }
     [self p_openControllViewWithContent:_putDetailView];
+}
+
+- (void)p_putMusic
+{
+    MPMediaItem *item = [self.player nowPlayingItem];
+    if (!item) {
+        [self p_closeControllView];
+        return;
+    }
+    
+    NSString *station = self.selectedStationName;
+    NSString *title = [item valueForKey:MPMediaItemPropertyTitle];
+    NSString *artist = [item valueForKey:MPMediaItemPropertyArtist];
+    
+    [[PTSMusicStationAPIManager sharedManager] setDelegate:self];
+    [[PTSMusicStationAPIManager sharedManager] putRequestWithStation:station
+                                                               title:title
+                                                              artist:artist];
 }
 
 
@@ -385,20 +409,24 @@
     CGRect rect = _putDetailView.frame;
     rect.origin.y = _controllView.frame.size.height - _putDetailView.frame.size.height -20.0f;
     _putDetailView.frame = rect;
+    
     UIPickerView *pickrView = (UIPickerView *)[_putDetailView viewWithTag:10];
     pickrView.dataSource = self;
     pickrView.delegate = self;
+    
+    UIButton *button = (UIButton *)[self.putDetailView viewWithTag:20];
+    [button addTarget:self action:@selector(p_putMusic) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)p_openControllViewWithContent:(UIView *)contentView {
     CGRect frame = self.controllView.frame;
     frame.origin.y = self.view.frame.size.height - self.controllView.frame.size.height;
     
+    [self.controllView addSubview:contentView];
+    contentView.tag = 1000;
+    
     [UIView animateWithDuration:0.3 animations:^{
         self.controllView.frame = frame;
-        [self.controllView addSubview:contentView];
-        contentView.tag = 1000;
-    
     } completion:^(BOOL finished) {
         if (finished) {
             if ([contentView isEqual:_getDetailView]) {
@@ -409,6 +437,8 @@
                     self.nearestStations = stations;
                     UIPickerView *pickrView = (UIPickerView *)[contentView viewWithTag:10];
                     [pickrView reloadAllComponents];
+                    UILabel *titleLabel = (UILabel *)[pickrView viewForRow:0 forComponent:0];
+                    self.selectedStationName = titleLabel.text;
                 }];
                 
             }
@@ -432,7 +462,9 @@
     }];
 }
 
-- (void)p_updateGetView{
+- (void)p_updateGetView
+{
+    
 }
 
 - (void)p_setUpLabelWithImageView:(SCOUtilImageView*)imageView isPlaying:(BOOL)flag {
@@ -457,6 +489,8 @@
         [imageView showPlayIndicatorView:YES];
     }
 }
+
+
 
 #pragma mark - SCOUtilImageViewDelegate
 -(void)didPushImageViewWithDictionary:(NSDictionary *)dictionary {
@@ -500,12 +534,12 @@
 }
 
 #pragma mark - PTSMusicStationAPIManagerDelegate
-- (void)didFinishLoardWithStationSongObject:(NSArray*)array{
+- (void)didFinishLoardWithStationSongObject:(NSArray*)array station:(NSString *)station {
     dispatch_async(dispatch_get_main_queue(), ^(){
         
         //駅名
         UILabel *stationLabel = (UILabel*)[_getDetailView viewWithTag:10];
-        stationLabel.text = @"六本木";
+        stationLabel.text = station;
 
         //アルバム名
         UILabel *alubumLabel = (UILabel*)[_getDetailView viewWithTag:30];
@@ -536,6 +570,20 @@
     });
 }
 
+- (void)didFinishPutMusic
+{
+    [self p_closeControllView];
+}
+
+- (void)didErrorResponse
+{
+    [self p_closeControllView];
+    OLGhostAlertView *ghastly = [[OLGhostAlertView alloc] initWithTitle:nil
+                                                                message:@"曲がありませんでした"];
+    [ghastly show];
+    
+}
+
 
 /***************************************************/
 #pragma mark - UIPickerViewDelegate/DataSource
@@ -558,6 +606,7 @@
     if (!retval) {
         retval= [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [pickerView rowSizeForComponent:component].width, [pickerView rowSizeForComponent:component].height)];
         retval.minimumScaleFactor = 0.1;
+        retval.adjustsFontSizeToFitWidth = YES;
         retval.textAlignment = NSTextAlignmentCenter;
     }
     retval.text = [NSString stringWithFormat:@"%@_%@", self.nearestStations[row][@"line"], self.nearestStations[row][@"name"]];

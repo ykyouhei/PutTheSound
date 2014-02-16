@@ -7,13 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <OLGhostAlertView.h>
 
 @protocol PTSMusicStationAPIManagerDelegate <NSObject>
-- (void)didFinishLoardWithStationSongObject:(NSArray*)array;
+- (void)didFinishLoardWithStationSongObject:(NSArray*)array station:(NSString *)station;
+- (void)didFinishPutMusic;
+- (void)didErrorResponse;
 @end
 
 @interface PTSMusicStationAPIManager : NSObject
 @property (nonatomic,weak) id<PTSMusicStationAPIManagerDelegate>delegate;
 + (PTSMusicStationAPIManager *)sharedManager;
 - (void)getRequest;
+- (void)putRequestWithStation:(NSString *)station title:(NSString *)title artist:(NSString *)artist;
 @end
