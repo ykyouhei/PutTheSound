@@ -44,7 +44,7 @@
 @property (nonatomic) NSString *selectedStationName;
 
 @property (nonatomic) NSDateFormatter *formatter;
-
+@property (nonatomic, strong) NSTimer *timer;
 @end
 
 @implementation PTSViewController
@@ -64,6 +64,12 @@
     self.carousel.type = 0;
     self.carousel.vertical = YES;
     
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f
+                                              target:self
+                                            selector:@selector(musicCount)
+                                            userInfo:nil
+                                             repeats:YES];
+    [_timer fire];
     
     
 //    CAGradientLayer *pageGradient = [CAGradientLayer layer];
@@ -315,7 +321,18 @@
                                                               artist:artist];
 }
 
-
+- (void)musicCount
+{
+    MPMediaItem *item = [self.player nowPlayingItem];
+    if (!item || !self.isPlaying) {
+        return;
+    }
+    
+    NSUInteger duration = [[item valueForKey:MPMediaItemPropertyPlaybackDuration] unsignedIntegerValue];
+    NSUInteger now = [self.player currentPlaybackTime];
+    
+    self.progressView.progress = (float)now/(float)duration;
+}
 
 /***************************************************/
 #pragma mark - PrivateMethods
