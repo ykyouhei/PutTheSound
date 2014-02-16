@@ -119,7 +119,8 @@
     
     // 画像取得（UIImage+AFNetworking）
     __weak SCOUtilImageView *weakImageView = imageView;
-    NSURL *url = [NSURL URLWithString:_recommendItems[indexPath.row][@"artworkUrl100"]];
+    NSString *urlString = [_recommendItems[indexPath.row][@"artworkUrl100"] stringByReplacingOccurrencesOfString:@"100x100" withString:@"200x200"];
+    NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         if (weakImageView) {
