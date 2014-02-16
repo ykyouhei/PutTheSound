@@ -113,6 +113,10 @@
     imageView.delegate = self;
     imageView.songUrl = _recommendItems[indexPath.row][@"previewUrl"];
     
+    
+    NSString *stringURl = _recommendItems[indexPath.row][@"trackViewUrl"];
+    
+    
     // 画像取得（UIImage+AFNetworking）
     __weak SCOUtilImageView *weakImageView = imageView;
     NSURL *url = [NSURL URLWithString:_recommendItems[indexPath.row][@"artworkUrl100"]];
