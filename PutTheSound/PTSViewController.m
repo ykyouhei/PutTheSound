@@ -16,6 +16,7 @@
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
+#import "PTSPeripheralManager.h"
 
 @interface PTSViewController ()
 @property (weak, nonatomic) IBOutlet iCarousel *carousel;
@@ -88,6 +89,9 @@
     [self p_setUpControllView];
     [self p_setUpGetView];
     [self p_setUpPutView];
+    
+    //iBeacon
+    [[PTSPeripheralManager sharedManager] startAdvertising:@"" withAlubumName:@""];
 }
 
 - (void)didReceiveMemoryWarning
@@ -238,6 +242,8 @@
         if (finished) {
             [self.player skipToPreviousItem];
             [self p_updateLabel];
+            //iBeacon
+            [[PTSPeripheralManager sharedManager] startAdvertising:@"" withAlubumName:@""];
         }
     }];
     
@@ -260,6 +266,8 @@
         if (finished) {
             [self.player skipToNextItem];
             [self p_updateLabel];
+            //iBeacon
+            [[PTSPeripheralManager sharedManager] startAdvertising:@"" withAlubumName:@""];
         }
     }];
 }

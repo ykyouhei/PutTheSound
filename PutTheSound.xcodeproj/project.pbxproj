@@ -42,6 +42,9 @@
 		8F8EC62E18AFE43A000D265E /* PTSMusicStationAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8EC62D18AFE43A000D265E /* PTSMusicStationAPIManager.m */; };
 		8F8EC63218AFFAA9000D265E /* PTSCrossingMusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8EC63118AFFAA9000D265E /* PTSCrossingMusicViewController.m */; };
 		8F8EC63618AFFE47000D265E /* PTSCrossingMusicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8EC63518AFFE47000D265E /* PTSCrossingMusicManager.m */; };
+		8FB34E0618B3AB8B00659BFC /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FB34E0518B3AB8B00659BFC /* CoreBluetooth.framework */; };
+		8FEF673B18B4FAC4003C2A23 /* PTSPeripheralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEF673A18B4FAC4003C2A23 /* PTSPeripheralManager.m */; };
+		8FEF673E18B4FADE003C2A23 /* PTSCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEF673D18B4FADE003C2A23 /* PTSCentralManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +113,11 @@
 		8F8EC63118AFFAA9000D265E /* PTSCrossingMusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSCrossingMusicViewController.m; sourceTree = "<group>"; };
 		8F8EC63418AFFE47000D265E /* PTSCrossingMusicManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSCrossingMusicManager.h; sourceTree = "<group>"; };
 		8F8EC63518AFFE47000D265E /* PTSCrossingMusicManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSCrossingMusicManager.m; sourceTree = "<group>"; };
+		8FB34E0518B3AB8B00659BFC /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		8FEF673918B4FAC4003C2A23 /* PTSPeripheralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSPeripheralManager.h; sourceTree = "<group>"; };
+		8FEF673A18B4FAC4003C2A23 /* PTSPeripheralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSPeripheralManager.m; sourceTree = "<group>"; };
+		8FEF673C18B4FADE003C2A23 /* PTSCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSCentralManager.h; sourceTree = "<group>"; };
+		8FEF673D18B4FADE003C2A23 /* PTSCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSCentralManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB34E0618B3AB8B00659BFC /* CoreBluetooth.framework in Frameworks */,
 				41AE376318AF44E7008277CB /* QuartzCore.framework in Frameworks */,
 				410568E518AE800C00CDBFEF /* CoreLocation.framework in Frameworks */,
 				8F6858F618AE217E0056D91D /* AVFoundation.framework in Frameworks */,
@@ -191,6 +200,7 @@
 		8F6858BF18AE216C0056D91D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8FB34E0518B3AB8B00659BFC /* CoreBluetooth.framework */,
 				41AE376218AF44E7008277CB /* QuartzCore.framework */,
 				410568E418AE800C00CDBFEF /* CoreLocation.framework */,
 				8F6858F518AE217D0056D91D /* AVFoundation.framework */,
@@ -206,6 +216,7 @@
 		8F6858C618AE216C0056D91D /* PutTheSound */ = {
 			isa = PBXGroup;
 			children = (
+				8FB34E0118B3A0FB00659BFC /* iBeacon */,
 				8F8EC62F18AFFA3A000D265E /* CrossingMusicTable */,
 				41AE376418AF50FF008277CB /* Model */,
 				41AE375E18AF2F32008277CB /* SlideController */,
@@ -353,6 +364,17 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		8FB34E0118B3A0FB00659BFC /* iBeacon */ = {
+			isa = PBXGroup;
+			children = (
+				8FEF673918B4FAC4003C2A23 /* PTSPeripheralManager.h */,
+				8FEF673A18B4FAC4003C2A23 /* PTSPeripheralManager.m */,
+				8FEF673C18B4FADE003C2A23 /* PTSCentralManager.h */,
+				8FEF673D18B4FADE003C2A23 /* PTSCentralManager.m */,
+			);
+			name = iBeacon;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -405,6 +427,11 @@
 				TargetAttributes = {
 					8F6858BC18AE216C0056D91D = {
 						DevelopmentTeam = AVWWV46Y77;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					8F6858DD18AE216D0056D91D = {
 						TestTargetID = 8F6858BC18AE216C0056D91D;
@@ -506,7 +533,9 @@
 				41AE376718AF51C1008277CB /* PTSMusicDataModel.m in Sources */,
 				8F8EC63618AFFE47000D265E /* PTSCrossingMusicManager.m in Sources */,
 				410568EC18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m in Sources */,
+				8FEF673B18B4FAC4003C2A23 /* PTSPeripheralManager.m in Sources */,
 				8F8EC62E18AFE43A000D265E /* PTSMusicStationAPIManager.m in Sources */,
+				8FEF673E18B4FADE003C2A23 /* PTSCentralManager.m in Sources */,
 				41AE376118AF2F70008277CB /* PTSSlideViewController.m in Sources */,
 				410568E318AE7FC900CDBFEF /* StationManager.m in Sources */,
 			);
@@ -636,13 +665,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Toshiki Chiba (R2U3DJS2ZM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Toshiki Chiba (R2U3DJS2ZM)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PutTheSound/PutTheSound-Prefix.pch";
 				INFOPLIST_FILE = "PutTheSound/PutTheSound-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "A57132C5-503B-4B9C-90AA-B8B033C0B167";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -653,13 +682,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Toshiki Chiba (AVWWV46Y77)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Toshiki Chiba (AVWWV46Y77)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PutTheSound/PutTheSound-Prefix.pch";
 				INFOPLIST_FILE = "PutTheSound/PutTheSound-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "B1028C1D-1086-4489-88FB-9174B940B51B";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
