@@ -12,8 +12,8 @@
 @property (nonatomic) NSUUID *proximityUUID;
 @property (nonatomic) CLBeaconRegion *beaconRegion;
 @property (nonatomic) CLLocationManager *locationManager;
-@property (nonatomic) NSNumber *currentMajor;
-@property (nonatomic) NSNumber *currentMinor;
+@property (nonatomic) int currentMajor;
+@property (nonatomic) int currentMinor;
 @end
 
 static NSString *const stringUUID = @"D801A9FA-13A7-49E3-9A67-B7FCA50C8934";
@@ -37,6 +37,9 @@ static CentralManager *_sharedManager = nil;
     self = [super init];
     if (self) {
         // 初期処理
+        _currentMajor = 0;
+        _currentMinor = 0;
+        
         _proximityUUID = [[NSUUID alloc] initWithUUIDString:stringUUID];
         _beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:_proximityUUID
                                                            identifier:stringidentifer];
@@ -136,9 +139,14 @@ static CentralManager *_sharedManager = nil;
                 
         }
         
-        if(nearestBeacon.major != _currentMajor && nearestBeacon.minor != _currentMinor){
+        int localMajor = [nearestBeacon.major intValue];
+        int localMinor = [nearestBeacon.minor intValue];
+        
+        if(localMajor != _currentMajor && localMinor != _currentMinor){
             int number = [nearestBeacon.major intValue] * 10000;
             number += [nearestBeacon.minor intValue];
+            self.currentMajor = [nearestBeacon.major intValue];
+            self.currentMinor = [nearestBeacon.minor intValue];
             
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%d",stringURL,number]];
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -157,6 +165,7 @@ static CentralManager *_sharedManager = nil;
                                            }
                                            
                                            [self p_showAlert:jsonObject[@"results"][0][@"trackName"]];
+                                           
                                        }
                                    }];
         }
