@@ -44,7 +44,8 @@
 		8F8EC63618AFFE47000D265E /* PTSCrossingMusicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8EC63518AFFE47000D265E /* PTSCrossingMusicManager.m */; };
 		8FB34E0618B3AB8B00659BFC /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FB34E0518B3AB8B00659BFC /* CoreBluetooth.framework */; };
 		8FEF673B18B4FAC4003C2A23 /* PTSPeripheralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEF673A18B4FAC4003C2A23 /* PTSPeripheralManager.m */; };
-		8FEF673E18B4FADE003C2A23 /* PTSCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEF673D18B4FADE003C2A23 /* PTSCentralManager.m */; };
+		8FEF674418B640B4003C2A23 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FEF674318B640B4003C2A23 /* AudioToolbox.framework */; };
+		8FEF674718B640F4003C2A23 /* CentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEF674618B640F4003C2A23 /* CentralManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,8 +117,10 @@
 		8FB34E0518B3AB8B00659BFC /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		8FEF673918B4FAC4003C2A23 /* PTSPeripheralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSPeripheralManager.h; sourceTree = "<group>"; };
 		8FEF673A18B4FAC4003C2A23 /* PTSPeripheralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSPeripheralManager.m; sourceTree = "<group>"; };
-		8FEF673C18B4FADE003C2A23 /* PTSCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSCentralManager.h; sourceTree = "<group>"; };
-		8FEF673D18B4FADE003C2A23 /* PTSCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSCentralManager.m; sourceTree = "<group>"; };
+		8FEF674218B640B3003C2A23 /* PutTheSound.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PutTheSound.entitlements; sourceTree = "<group>"; };
+		8FEF674318B640B4003C2A23 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		8FEF674518B640F4003C2A23 /* CentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentralManager.h; sourceTree = "<group>"; };
+		8FEF674618B640F4003C2A23 /* CentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentralManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,7 @@
 				410568E518AE800C00CDBFEF /* CoreLocation.framework in Frameworks */,
 				8F6858F618AE217E0056D91D /* AVFoundation.framework in Frameworks */,
 				8F6858C318AE216C0056D91D /* CoreGraphics.framework in Frameworks */,
+				8FEF674418B640B4003C2A23 /* AudioToolbox.framework in Frameworks */,
 				8F6858C518AE216C0056D91D /* UIKit.framework in Frameworks */,
 				8F6858C118AE216C0056D91D /* Foundation.framework in Frameworks */,
 				50B83DAF02EB4268B9912154 /* libPods.a in Frameworks */,
@@ -200,6 +204,7 @@
 		8F6858BF18AE216C0056D91D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8FEF674318B640B4003C2A23 /* AudioToolbox.framework */,
 				8FB34E0518B3AB8B00659BFC /* CoreBluetooth.framework */,
 				41AE376218AF44E7008277CB /* QuartzCore.framework */,
 				410568E418AE800C00CDBFEF /* CoreLocation.framework */,
@@ -216,6 +221,7 @@
 		8F6858C618AE216C0056D91D /* PutTheSound */ = {
 			isa = PBXGroup;
 			children = (
+				8FEF674218B640B3003C2A23 /* PutTheSound.entitlements */,
 				8FB34E0118B3A0FB00659BFC /* iBeacon */,
 				8F8EC62F18AFFA3A000D265E /* CrossingMusicTable */,
 				41AE376418AF50FF008277CB /* Model */,
@@ -369,8 +375,8 @@
 			children = (
 				8FEF673918B4FAC4003C2A23 /* PTSPeripheralManager.h */,
 				8FEF673A18B4FAC4003C2A23 /* PTSPeripheralManager.m */,
-				8FEF673C18B4FADE003C2A23 /* PTSCentralManager.h */,
-				8FEF673D18B4FADE003C2A23 /* PTSCentralManager.m */,
+				8FEF674518B640F4003C2A23 /* CentralManager.h */,
+				8FEF674618B640F4003C2A23 /* CentralManager.m */,
 			);
 			name = iBeacon;
 			sourceTree = "<group>";
@@ -522,6 +528,7 @@
 				410568E818AE84CF00CDBFEF /* PTSRecommendCFViewController.m in Sources */,
 				8F6858D718AE216D0056D91D /* PTSViewController.m in Sources */,
 				41AE378A18AF7566008277CB /* UIImage+ImageEffects.m in Sources */,
+				8FEF674718B640F4003C2A23 /* CentralManager.m in Sources */,
 				8F68590B18AE3BEB0056D91D /* PTSRecommendAPIManager.m in Sources */,
 				8F8EC63218AFFAA9000D265E /* PTSCrossingMusicViewController.m in Sources */,
 				8F68590718AE3BA40056D91D /* SCOUtilImageView.m in Sources */,
@@ -535,7 +542,6 @@
 				410568EC18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m in Sources */,
 				8FEF673B18B4FAC4003C2A23 /* PTSPeripheralManager.m in Sources */,
 				8F8EC62E18AFE43A000D265E /* PTSMusicStationAPIManager.m in Sources */,
-				8FEF673E18B4FADE003C2A23 /* PTSCentralManager.m in Sources */,
 				41AE376118AF2F70008277CB /* PTSSlideViewController.m in Sources */,
 				410568E318AE7FC900CDBFEF /* StationManager.m in Sources */,
 			);
@@ -665,6 +671,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = PutTheSound/PutTheSound.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Toshiki Chiba (R2U3DJS2ZM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Toshiki Chiba (R2U3DJS2ZM)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -682,6 +689,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = PutTheSound/PutTheSound.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Toshiki Chiba (AVWWV46Y77)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Toshiki Chiba (AVWWV46Y77)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

@@ -14,7 +14,9 @@
 @end
 
 //612446160
-static NSString *const stringURL = @"http://www1415uo.sakura.ne.jp/music/GetTrackID.php?artist=%E3%81%AB%E3%82%93%E3%81%98%E3%82%83%E3%82%8A%E3%81%B0%E3%82%93%E3%81%B0%E3%82%93&title=%E3%81%8D%E3%82%83%E3%82%8A%E3%83%BC%E3%81%B1%E3%81%BF%E3%82%85%E3%81%B1%E3%81%BF%E3%82%85";
+//static NSString *const stringURL = @"http://www1415uo.sakura.ne.jp/music/GetTrackID.php?artist=%E3%81%AB%E3%82%93%E3%81%98%E3%82%83%E3%82%8A%E3%81%B0%E3%82%93%E3%81%B0%E3%82%93&title=%E3%81%8D%E3%82%83%E3%82%8A%E3%83%BC%E3%81%B1%E3%81%BF%E3%82%85%E3%81%B1%E3%81%BF%E3%82%85";
+
+static NSString *const stringURL = @"http://www1415uo.sakura.ne.jp/music/GetTrackID.php?artist=";
 
 static NSString *const stringUUID = @"D801A9FA-13A7-49E3-9A67-B7FCA50C8934";
 static NSString *const stringidentifer = @"kogane";
@@ -45,12 +47,21 @@ static PTSPeripheralManager *_sharedManager = nil;
 
 #pragma mark - Public Methods
 - (void)startAdvertising:(NSString*)artistName withAlubumName:(NSString*)alubumNAme{
+    if([artistName isEqualToString:@""] || [alubumNAme isEqualToString:@""]){
+        return;
+    }
+    
     if (self.peripheralManager.state == CBPeripheralManagerStatePoweredOn) {
         
         //一度停止
         [self.peripheralManager stopAdvertising];
         
-        NSURL *url = [NSURL URLWithString:stringURL];
+        //NSURL *url = [NSURL URLWithString:stringURL];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@&title=%@",stringURL,
+                                           [artistName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
+                                           [alubumNAme stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+        
+        
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new]
                                completionHandler: ^(NSURLResponse *response, NSData *data, NSError *error){
@@ -63,8 +74,10 @@ static PTSPeripheralManager *_sharedManager = nil;
                                            return;
                                        }
                                        
-                                       unsigned short int major = [trackID intValue] / 1000;
-                                       unsigned short int minor = [trackID intValue] % 1000;
+                                       int major = [trackID intValue] / 10000;
+                                       int minor = [trackID intValue] % 10000;
+                                       
+                                       
                                        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:_proximityUUID
                                                                                                               major:major
                                                                                                               minor:minor
