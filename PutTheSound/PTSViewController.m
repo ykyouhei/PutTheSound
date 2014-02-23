@@ -11,7 +11,8 @@
 #import "PTSSlideViewController.h"
 #import "PTSMusicDataModel.h"
 #import "PTSRecommendArtworkView.h"
-#import "StationManager.h"
+//#import "StationManager.h"
+#import "PTSLocalSearchManager.h"
 #import "UIImage+ImageEffects.h"
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
@@ -42,8 +43,8 @@
 @property (nonatomic) AVAudioPlayer *audioPlayer;
 @property (nonatomic) NSString *selectedStringUrl;
 
-@property (nonatomic) NSArray *nearestStations;
-@property (nonatomic) NSString *selectedStationName;
+@property (nonatomic) NSArray *nearestLocations;
+@property (nonatomic) NSString *selectedLocationName;
 
 @property (nonatomic) NSDateFormatter *formatter;
 @property (nonatomic, strong) NSTimer *timer;
@@ -325,12 +326,12 @@
         return;
     }
     
-    NSString *station = self.selectedStationName;
+    NSString *location = self.selectedLocationName;
     NSString *title = [item valueForKey:MPMediaItemPropertyTitle];
     NSString *artist = [item valueForKey:MPMediaItemPropertyArtist];
     
     [[PTSMusicStationAPIManager sharedManager] setDelegate:self];
-    [[PTSMusicStationAPIManager sharedManager] putRequestWithStation:station
+    [[PTSMusicStationAPIManager sharedManager] putRequestWithStation:location
                                                                title:title
                                                               artist:artist];
 }
@@ -481,12 +482,12 @@
                 [[PTSMusicStationAPIManager sharedManager] setDelegate:self];
                 [[PTSMusicStationAPIManager sharedManager] getRequest];
             } else if ([contentView isEqual:_putDetailView]) {
-                [[StationManager sharedManager] requestNearestStations:^(NSArray *stations, NSError *error) {
-                    self.nearestStations = stations;
+                [[PTSLocalSearchManager sharedManager] requestNearestLocations:^(NSArray *locations, NSError *error) {
+                    self.nearestLocations = locations;
                     UIPickerView *pickrView = (UIPickerView *)[contentView viewWithTag:10];
                     [pickrView reloadAllComponents];
                     UILabel *titleLabel = (UILabel *)[pickrView viewForRow:0 forComponent:0];
-                    self.selectedStationName = titleLabel.text;
+                    self.selectedLocationName = titleLabel.text;
                 }];
                 
             }
@@ -644,7 +645,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return self.nearestStations ? self.nearestStations.count : 0;
+    return self.nearestLocations ? self.nearestLocations.count : 0;
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView
@@ -657,18 +658,18 @@
         retval.adjustsFontSizeToFitWidth = YES;
         retval.textAlignment = NSTextAlignmentCenter;
     }
-    retval.text = [NSString stringWithFormat:@"%@_%@", self.nearestStations[row][@"line"], self.nearestStations[row][@"name"]];
+    retval.text = self.nearestLocations[row][@"Name"];
     
     return retval;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    if (!self.nearestStations) {
+    if (!self.nearestLocations) {
         return;
     }
     
-    self.selectedStationName = [NSString stringWithFormat:@"%@_%@", self.nearestStations[row][@"line"], self.nearestStations[row][@"name"]];
+    self.selectedLocationName = self.nearestLocations[row][@"Name"];
 }
 
 @end
