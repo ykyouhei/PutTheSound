@@ -30,3 +30,14 @@ $ pod install
 
 #### 参考
 https://gist.github.com/STAR-ZERO/5001341
+
+利用OSS
+-----------
+* [AFNetworking](https://github.com/AFNetworking/AFNetworking)
+* [OLGhostAlertView](https://github.com/ondalabs/OLGhostAlertView)
+* [iCarousel](https://github.com/nicklockwood/iCarousel)
+
+利用API
+----------
+* [Yahoo!ローカルサーチAPI](http://developer.yahoo.co.jp/webapi/map/openlocalplatform/v1/localsearch.html)
+
