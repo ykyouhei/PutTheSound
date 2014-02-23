@@ -16,6 +16,8 @@
 
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
+#import "PTSPeripheralManager.h"
+#import "CentralManager.h"
 
 @interface PTSViewController ()
 @property (weak, nonatomic) IBOutlet iCarousel *carousel;
@@ -88,6 +90,14 @@
     [self p_setUpControllView];
     [self p_setUpGetView];
     [self p_setUpPutView];
+    
+    //iBeacon
+    [[PTSPeripheralManager sharedManager] startAdvertising:@"" withAlubumName:@""];
+    [[CentralManager sharedManager] startMonitoring];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -238,6 +248,8 @@
         if (finished) {
             [self.player skipToPreviousItem];
             [self p_updateLabel];
+            //iBeacon
+            [[PTSPeripheralManager sharedManager] startAdvertising:[self p_getNowArtist] withAlubumName:[self p_getNowAlubum]];
         }
     }];
     
@@ -260,8 +272,10 @@
         if (finished) {
             [self.player skipToNextItem];
             [self p_updateLabel];
+            //iBeacon
+            [[PTSPeripheralManager sharedManager] startAdvertising:[self p_getNowArtist] withAlubumName:[self p_getNowAlubum]];
         }
-    }];
+    }]; 
 }
 
 - (IBAction)tapNowHandler:(id)sender
@@ -351,6 +365,25 @@
     }
 }
 
+- (NSString*)p_getNowArtist {
+    if(_isPlaying){
+        MPMediaItem *song = [self.player nowPlayingItem];
+        return [song valueForProperty: MPMediaItemPropertyArtist];
+    }
+    else{
+        return @"";
+    }
+}
+
+- (NSString*)p_getNowAlubum {
+    if(_isPlaying){
+        MPMediaItem *song = [self.player nowPlayingItem];
+        return [song valueForProperty: MPMediaItemPropertyArtist];
+    }
+    else{
+        return @"";
+    }
+}
 
 - (void)p_updateLabel {
     if(_isPlaying){
@@ -371,8 +404,6 @@
         // NSDateFormatter を用意します。
         
         self.timeLabel.text = [self.formatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:duration]];
-        
-
     }
 }
 
