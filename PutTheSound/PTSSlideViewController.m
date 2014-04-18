@@ -14,7 +14,7 @@
 @interface PTSSlideViewController ()
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 @property (weak, nonatomic) IBOutlet UIView *recommendView;
-@property (weak, nonatomic) IBOutlet UIView *settingsView;
+@property (weak, nonatomic) IBOutlet UIView *timeLineView;
 @end
 
 @implementation PTSSlideViewController
@@ -80,6 +80,7 @@
         self.recommendView.frame = frame2;
     } completion:^(BOOL finished) {
         if (finished) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"startTimer" object:self userInfo:nil];
             self.closed = NO;
         }
     }];
@@ -98,6 +99,7 @@
         self.recommendView.frame = frame2;
     } completion:^(BOOL finished) {
         if (finished) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"stopTimer" object:self userInfo:nil];
             self.closed = YES;
         }
     }];
