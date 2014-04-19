@@ -19,6 +19,8 @@
 		41AE378A18AF7566008277CB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AE378918AF7566008277CB /* UIImage+ImageEffects.m */; };
 		41EBD53218BA0ED800C77486 /* PTSLocalSearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EBD53118BA0ED800C77486 /* PTSLocalSearchManager.m */; };
 		50B83DAF02EB4268B9912154 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABD9E847C314E028B0C1ACC /* libPods.a */; };
+		7E2F0FBF18D5ED5E00595CEA /* PTSTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2F0FBE18D5ED5E00595CEA /* PTSTimelineViewController.m */; };
+		7E2F0FC518D5FA3600595CEA /* PTSTimelineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2F0FC418D5FA3600595CEA /* PTSTimelineManager.m */; };
 		8F6858C118AE216C0056D91D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C018AE216C0056D91D /* Foundation.framework */; };
 		8F6858C318AE216C0056D91D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C218AE216C0056D91D /* CoreGraphics.framework */; };
 		8F6858C518AE216C0056D91D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C418AE216C0056D91D /* UIKit.framework */; };
@@ -80,6 +82,10 @@
 		41AE378918AF7566008277CB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		41EBD53018BA0ED800C77486 /* PTSLocalSearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSLocalSearchManager.h; sourceTree = "<group>"; };
 		41EBD53118BA0ED800C77486 /* PTSLocalSearchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSLocalSearchManager.m; sourceTree = "<group>"; };
+		7E2F0FBD18D5ED5E00595CEA /* PTSTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSTimelineViewController.h; sourceTree = "<group>"; };
+		7E2F0FBE18D5ED5E00595CEA /* PTSTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSTimelineViewController.m; sourceTree = "<group>"; };
+		7E2F0FC318D5FA3600595CEA /* PTSTimelineManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSTimelineManager.h; sourceTree = "<group>"; };
+		7E2F0FC418D5FA3600595CEA /* PTSTimelineManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSTimelineManager.m; sourceTree = "<group>"; };
 		8F6858BD18AE216C0056D91D /* PutTheSound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PutTheSound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F6858C018AE216C0056D91D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8F6858C218AE216C0056D91D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -184,6 +190,33 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		7E2F0FC018D5F9BC00595CEA /* TimeLineView */ = {
+			isa = PBXGroup;
+			children = (
+				7E2F0FC218D5FA0900595CEA /* Model */,
+				7E2F0FC118D5F9FC00595CEA /* Controller */,
+				7E2F0FBD18D5ED5E00595CEA /* PTSTimelineViewController.h */,
+				7E2F0FBE18D5ED5E00595CEA /* PTSTimelineViewController.m */,
+			);
+			name = TimeLineView;
+			sourceTree = "<group>";
+		};
+		7E2F0FC118D5F9FC00595CEA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		7E2F0FC218D5FA0900595CEA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7E2F0FC318D5FA3600595CEA /* PTSTimelineManager.h */,
+				7E2F0FC418D5FA3600595CEA /* PTSTimelineManager.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		8F6858B418AE216C0056D91D = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +266,7 @@
 				8F68590018AE29710056D91D /* Category */,
 				8F6858FF18AE27510056D91D /* MusicControlView */,
 				8F6858FE18AE27450056D91D /* PlayListView */,
+				7E2F0FC018D5F9BC00595CEA /* TimeLineView */,
 				8F6858FD18AE27330056D91D /* RecommenView */,
 				8F6858CF18AE216D0056D91D /* PTSAppDelegate.h */,
 				8F6858D018AE216D0056D91D /* PTSAppDelegate.m */,
@@ -538,6 +572,7 @@
 				41EBD53218BA0ED800C77486 /* PTSLocalSearchManager.m in Sources */,
 				8F8EC63218AFFAA9000D265E /* PTSCrossingMusicViewController.m in Sources */,
 				8F68590718AE3BA40056D91D /* SCOUtilImageView.m in Sources */,
+				7E2F0FBF18D5ED5E00595CEA /* PTSTimelineViewController.m in Sources */,
 				8F68590318AE29850056D91D /* UIColor+Hex.m in Sources */,
 				8F6858FC18AE272D0056D91D /* PTSPlayListViewController.m in Sources */,
 				8F6858D118AE216D0056D91D /* PTSAppDelegate.m in Sources */,
@@ -545,6 +580,7 @@
 				8F6858F918AE271A0056D91D /* PTSRecommendViewController.m in Sources */,
 				41AE376718AF51C1008277CB /* PTSMusicDataModel.m in Sources */,
 				8F8EC63618AFFE47000D265E /* PTSCrossingMusicManager.m in Sources */,
+				7E2F0FC518D5FA3600595CEA /* PTSTimelineManager.m in Sources */,
 				410568EC18AE8ECA00CDBFEF /* PTSRecommendArtworkView.m in Sources */,
 				8FEF673B18B4FAC4003C2A23 /* PTSPeripheralManager.m in Sources */,
 				8F8EC62E18AFE43A000D265E /* PTSMusicStationAPIManager.m in Sources */,
