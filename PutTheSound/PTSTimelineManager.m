@@ -34,7 +34,7 @@ static NSString *const requestURL = @"http://www1415uo.sakura.ne.jp/music/GetTim
                                    NSError *error = nil;
                                    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
                                    
-                                   if(!jsonObject && error){
+                                   if(!jsonObject || error){
                                        return;
                                    }
                                    
@@ -101,7 +101,7 @@ static NSString *const requestURL = @"http://www1415uo.sakura.ne.jp/music/GetTim
 - (NSMutableAttributedString*)stationLabelText:(NSMutableDictionary*)dic
 {
     NSString *time = [self dateString:dic[@"time"]];
-    NSString *stationName = [NSString stringWithFormat:@"%@駅", dic[@"station"]];
+    NSString *stationName = [NSString stringWithFormat:@"%@", dic[@"station"]];
     NSRange range = [stationName rangeOfString:@"_"];
     if (range.location != NSNotFound) {
         NSString *lineName = [stationName substringToIndex:range.location];
