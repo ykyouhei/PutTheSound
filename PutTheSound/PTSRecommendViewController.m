@@ -33,13 +33,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [[PTSRecommendAPIManager sharedManager] setDelegate:self];
-    [[PTSRecommendAPIManager sharedManager] request];
-    
     [self.tableView setDataSource:self];
     [self.tableView setDelegate:self];
     
     [self p_indicatorShow:YES];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [[PTSRecommendAPIManager sharedManager] setDelegate:self];
+    [[PTSRecommendAPIManager sharedManager] request];
 }
 
 - (void)didReceiveMemoryWarning
