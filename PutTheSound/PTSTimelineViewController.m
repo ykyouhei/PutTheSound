@@ -7,6 +7,7 @@
 //
 
 #import "PTSTimelineViewController.h"
+#import "PTSSlideViewController.h"
 
 static CGFloat const RefreshTimelineSec = 60.0f;
 @interface PTSTimelineViewController ()
@@ -23,6 +24,11 @@ static CGFloat const RefreshTimelineSec = 60.0f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(timerStart)
                                                  name:@"startTimer"
@@ -31,9 +37,23 @@ static CGFloat const RefreshTimelineSec = 60.0f;
                                              selector:@selector(stopTimer)
                                                  name:@"stopTimer"
                                                object:nil];
+    // scrollToTopの制御通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(p_setScrollsToTopNo)
+                                                 name:openLeftNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(p_setScrollsToTopYes)
+                                                 name:openRightNotification
+                                               object:nil];
     
     [[PTSTimelineManager sharedManager] setDelegate:self];
     [self reloadAsync];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,6 +81,15 @@ static CGFloat const RefreshTimelineSec = 60.0f;
     if ([_timer isValid]) {
         [self.timer invalidate];
     }
+}
+
+- (void)p_setScrollsToTopNo
+{
+    [self.tableView setScrollsToTop:NO];
+}
+- (void)p_setScrollsToTopYes
+{
+    [self.tableView setScrollsToTop:YES];
 }
 
 #pragma mark - Private

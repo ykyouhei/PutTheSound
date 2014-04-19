@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
+/** Notification
+ */
+extern NSString *const openLeftNotification;
+extern NSString *const openRightNotification;
+
 /**
  *  Slideを管理するViewController
  */

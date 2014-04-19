@@ -8,6 +8,7 @@
 
 #import "PTSRecommendViewController.h"
 #import "PTSRecommendArtworkView.h"
+#import "PTSSlideViewController.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface PTSRecommendViewController ()
@@ -41,6 +42,16 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    // scrollToTopの制御通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(p_setScrollsToTopNo)
+                                                 name:openRightNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(p_setScrollsToTopYes)
+                                                 name:openLeftNotification
+                                               object:nil];
+
     [[PTSRecommendAPIManager sharedManager] setDelegate:self];
     [[PTSRecommendAPIManager sharedManager] request];
 }
@@ -49,6 +60,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Private Methods
@@ -197,4 +213,13 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:result]];
 }
 
+#pragma mark - Notification
+- (void)p_setScrollsToTopNo
+{
+    [self.tableView setScrollsToTop:NO];
+}
+- (void)p_setScrollsToTopYes
+{
+    [self.tableView setScrollsToTop:YES];
+}
 @end

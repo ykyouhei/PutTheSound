@@ -17,6 +17,10 @@
 @property (weak, nonatomic) IBOutlet UIView *timeLineView;
 @end
 
+// つうち
+NSString *const openLeftNotification = @"openLeft";
+NSString *const openRightNotification = @"openRight";
+
 @implementation PTSSlideViewController
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -62,6 +66,7 @@
         self.mainView.frame = frame;
     } completion:^(BOOL finished) {
         if (finished) {
+             [[NSNotificationCenter defaultCenter] postNotificationName:openLeftNotification object:self userInfo:nil];
             self.closed = NO;
         }
     }];
@@ -80,6 +85,7 @@
         self.recommendView.frame = frame2;
     } completion:^(BOOL finished) {
         if (finished) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:openRightNotification object:self userInfo:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"startTimer" object:self userInfo:nil];
             self.closed = NO;
         }
