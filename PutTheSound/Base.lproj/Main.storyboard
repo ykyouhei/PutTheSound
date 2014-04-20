@@ -99,12 +99,6 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" id="uO1-YG-3fF">
-                                        <rect key="frame" x="15" y="109" width="246" height="3"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="progressTintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="trackTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </progressView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZUl-gW-oGs">
                                         <rect key="frame" x="276" y="99" width="42" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -112,6 +106,29 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" id="IOf-z7-Ygf" userLabel="GestureVIew">
+                                        <rect key="frame" x="15" y="99" width="246" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" id="uO1-YG-3fF">
+                                                <rect key="frame" x="0.0" y="10" width="246" height="3"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
+                                                <color key="progressTintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="trackTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            </progressView>
+                                            <view contentMode="scaleToFill" id="ldZ-vn-TRE">
+                                                <rect key="frame" x="0.0" y="6" width="2" height="11"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="1" green="0.17301783381294988" blue="0.060136425345614475" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="kni-q7-lKC" appends="YES" id="5HF-Uc-YiT"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                             </view>
@@ -151,6 +168,7 @@
                         <outlet property="carousel" destination="hV3-j1-InB" id="v3G-pB-Jwr"/>
                         <outlet property="detailLabel" destination="1aU-9c-8Ee" id="ZdI-Wi-8a2"/>
                         <outlet property="mainLabel" destination="fJ0-ox-KkT" id="I0P-ON-nL6"/>
+                        <outlet property="musicControllView" destination="ldZ-vn-TRE" id="oJI-dg-WJ7"/>
                         <outlet property="progressView" destination="uO1-YG-3fF" id="rUf-74-tYX"/>
                         <outlet property="timeLabel" destination="ZUl-gW-oGs" id="vRt-F0-UdG"/>
                         <outlet property="toolView" destination="L5r-Ng-UW3" id="FPu-XJ-zho"/>
@@ -175,6 +193,11 @@
                         <outlet property="delegate" destination="u3I-pd-yfk" id="Ib1-vj-x8h"/>
                     </connections>
                 </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="kni-q7-lKC">
+                    <connections>
+                        <action selector="musicControlHandler:" destination="u3I-pd-yfk" id="vdN-Gb-Q4I"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-5" y="81"/>
         </scene>
@@ -488,7 +511,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9MF-j0-pwS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-161" y="-593"/>
+            <point key="canvasLocation" x="-5" y="-595"/>
         </scene>
         <!--Crossing Music View Controller-->
         <scene sceneID="bMk-DR-3s8">

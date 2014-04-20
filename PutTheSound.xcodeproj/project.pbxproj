@@ -471,7 +471,7 @@
 				ORGANIZATIONNAME = "Toshiki Chiba";
 				TargetAttributes = {
 					8F6858BC18AE216C0056D91D = {
-						DevelopmentTeam = AVWWV46Y77;
+						DevelopmentTeam = 6EC83W22VX;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
