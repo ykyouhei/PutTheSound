@@ -17,6 +17,7 @@
 		41AE376318AF44E7008277CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41AE376218AF44E7008277CB /* QuartzCore.framework */; };
 		41AE376718AF51C1008277CB /* PTSMusicDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AE376618AF51C1008277CB /* PTSMusicDataModel.m */; };
 		41AE378A18AF7566008277CB /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AE378918AF7566008277CB /* UIImage+ImageEffects.m */; };
+		41B032581903B37D006F598C /* PTSSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B032571903B37D006F598C /* PTSSettingsTableViewController.m */; };
 		41EBD53218BA0ED800C77486 /* PTSLocalSearchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EBD53118BA0ED800C77486 /* PTSLocalSearchManager.m */; };
 		50B83DAF02EB4268B9912154 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABD9E847C314E028B0C1ACC /* libPods.a */; };
 		7E2F0FBF18D5ED5E00595CEA /* PTSTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2F0FBE18D5ED5E00595CEA /* PTSTimelineViewController.m */; };
@@ -80,6 +81,8 @@
 		41AE376618AF51C1008277CB /* PTSMusicDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSMusicDataModel.m; sourceTree = "<group>"; };
 		41AE378818AF7566008277CB /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		41AE378918AF7566008277CB /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		41B032561903B37D006F598C /* PTSSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSSettingsTableViewController.h; sourceTree = "<group>"; };
+		41B032571903B37D006F598C /* PTSSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSSettingsTableViewController.m; sourceTree = "<group>"; };
 		41EBD53018BA0ED800C77486 /* PTSLocalSearchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSLocalSearchManager.h; sourceTree = "<group>"; };
 		41EBD53118BA0ED800C77486 /* PTSLocalSearchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSLocalSearchManager.m; sourceTree = "<group>"; };
 		7E2F0FBD18D5ED5E00595CEA /* PTSTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSTimelineViewController.h; sourceTree = "<group>"; };
@@ -190,6 +193,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		41B032551903B322006F598C /* SettingsTable */ = {
+			isa = PBXGroup;
+			children = (
+				41B032561903B37D006F598C /* PTSSettingsTableViewController.h */,
+				41B032571903B37D006F598C /* PTSSettingsTableViewController.m */,
+			);
+			name = SettingsTable;
+			sourceTree = "<group>";
+		};
 		7E2F0FC018D5F9BC00595CEA /* TimeLineView */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				8FEF674218B640B3003C2A23 /* PutTheSound.entitlements */,
+				41B032551903B322006F598C /* SettingsTable */,
 				8FB34E0118B3A0FB00659BFC /* iBeacon */,
 				8F8EC62F18AFFA3A000D265E /* CrossingMusicTable */,
 				41AE376418AF50FF008277CB /* Model */,
@@ -471,7 +484,7 @@
 				ORGANIZATIONNAME = "Toshiki Chiba";
 				TargetAttributes = {
 					8F6858BC18AE216C0056D91D = {
-						DevelopmentTeam = AVWWV46Y77;
+						DevelopmentTeam = 6EC83W22VX;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -572,6 +585,7 @@
 				41EBD53218BA0ED800C77486 /* PTSLocalSearchManager.m in Sources */,
 				8F8EC63218AFFAA9000D265E /* PTSCrossingMusicViewController.m in Sources */,
 				8F68590718AE3BA40056D91D /* SCOUtilImageView.m in Sources */,
+				41B032581903B37D006F598C /* PTSSettingsTableViewController.m in Sources */,
 				7E2F0FBF18D5ED5E00595CEA /* PTSTimelineViewController.m in Sources */,
 				8F68590318AE29850056D91D /* UIColor+Hex.m in Sources */,
 				8F6858FC18AE272D0056D91D /* PTSPlayListViewController.m in Sources */,

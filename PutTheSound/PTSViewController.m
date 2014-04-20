@@ -48,6 +48,9 @@
 
 @property (nonatomic) NSDateFormatter *formatter;
 @property (nonatomic, strong) NSTimer *timer;
+
+@property (weak, nonatomic) IBOutlet UIView *musicControllView;
+@property (assign, nonatomic, getter = isDragging) BOOL dragging;
 @end
 
 @implementation PTSViewController
@@ -66,6 +69,7 @@
     self.carousel.delegate = self;
     self.carousel.type = 0;
     self.carousel.vertical = YES;
+    self.dragging = NO;
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:1.0f
                                               target:self
@@ -318,6 +322,41 @@
     [self p_openControllViewWithContent:_putDetailView];
 }
 
+- (IBAction)musicControlHandler:(UIPanGestureRecognizer *)sender {
+    switch (sender.state) {
+        case UIGestureRecognizerStateBegan:
+            self.dragging = YES;
+            break;
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateEnded:
+            self.dragging = NO;
+            break;
+        default:
+            break;
+    }
+    
+    MPMediaItem *item = [self.player nowPlayingItem];
+    if (!item || !self.isPlaying) {
+        return;
+    }
+    
+    CGPoint location = [sender locationInView:self.progressView];
+    if (location.x < 0 || location.x > self.progressView.frame.size.width) {
+        return;
+    }
+    
+    NSUInteger duration = [[item valueForKey:MPMediaItemPropertyPlaybackDuration] unsignedIntegerValue];
+    
+    CGFloat progress = location.x / self.progressView.frame.size.width;
+    CGPoint center = self.musicControllView.center;
+    center.x = location.x;
+    self.player.currentPlaybackTime = (NSInteger)(duration * progress);
+    self.musicControllView.center = center;
+    self.progressView.progress = progress;
+}
+
+
+
 - (void)p_putMusic
 {
     MPMediaItem *item = [self.player nowPlayingItem];
@@ -339,14 +378,18 @@
 - (void)musicCount
 {
     MPMediaItem *item = [self.player nowPlayingItem];
-    if (!item || !self.isPlaying) {
+    if (!item || !self.isPlaying || self.isDragging) {
         return;
     }
     
     NSUInteger duration = [[item valueForKey:MPMediaItemPropertyPlaybackDuration] unsignedIntegerValue];
     NSUInteger now = [self.player currentPlaybackTime];
     
-    self.progressView.progress = (float)now/(float)duration;
+    CGFloat progress = (float)now/(float)duration;
+    CGPoint center = self.musicControllView.center;
+    center.x = self.progressView.frame.size.width * progress;
+    self.musicControllView.center = center;
+    self.progressView.progress = progress;
 }
 
 /***************************************************/

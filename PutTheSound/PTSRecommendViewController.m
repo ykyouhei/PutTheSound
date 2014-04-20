@@ -213,6 +213,11 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:result]];
 }
 
+- (IBAction)didPushSettingsButton:(id)sender {
+    [self.parentViewController performSegueWithIdentifier:@"showSettings" sender:self];
+}
+
+
 #pragma mark - Notification
 - (void)p_setScrollsToTopNo
 {
