@@ -18,6 +18,8 @@ extern NSString *const openRightNotification;
  *  Slideを管理するViewController
  */
 @interface PTSSlideViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIView *customStatusBarView;
+@property (weak, nonatomic) IBOutlet UILabel *animationLabel;
 
 @property (assign, nonatomic, getter= isClosed) BOOL closed;
 

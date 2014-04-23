@@ -51,6 +51,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *musicControllView;
 @property (assign, nonatomic, getter = isDragging) BOOL dragging;
+
 @end
 
 @implementation PTSViewController
@@ -99,6 +100,7 @@
     //iBeacon
     [[PTSPeripheralManager sharedManager] startAdvertising:@"" withAlubumName:@""];
     [[CentralManager sharedManager] startMonitoring];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -110,7 +112,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 /***************************************************/
 #pragma mark - iCarouselDataSource
@@ -255,6 +256,7 @@
             [self p_updateLabel];
             //iBeacon
             [[PTSPeripheralManager sharedManager] startAdvertising:[self p_getNowArtist] withAlubumName:[self p_getNowAlubum]];
+            [self p_updateStatusBar];
         }
     }];
     
@@ -279,8 +281,9 @@
             [self p_updateLabel];
             //iBeacon
             [[PTSPeripheralManager sharedManager] startAdvertising:[self p_getNowArtist] withAlubumName:[self p_getNowAlubum]];
+            [self p_updateStatusBar];
         }
-    }]; 
+    }];
 }
 
 - (IBAction)tapNowHandler:(id)sender
@@ -395,6 +398,12 @@
 /***************************************************/
 #pragma mark - PrivateMethods
 /***************************************************/
+
+- (void)p_updateStatusBar
+{
+    NSDictionary *dict = @{@"SongTitle":_mainLabel.text};
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshStatusBar" object:self userInfo:dict];
+}
 
 - (void)p_setUpButton {
     if(_isPlaying){
