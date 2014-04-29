@@ -20,6 +20,9 @@
 #import "PTSPeripheralManager.h"
 #import "CentralManager.h"
 
+//曲情報登録用
+#import "PTSMusicRegisterManager.h"
+
 @interface PTSViewController ()
 @property (weak, nonatomic) IBOutlet iCarousel *carousel;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
@@ -101,10 +104,16 @@
     [[PTSPeripheralManager sharedManager] startAdvertising:@"" withAlubumName:@""];
     [[CentralManager sharedManager] startMonitoring];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_nowPlayingItemChanged:)
+                                                 name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification
+                                               object:self.player];
+    
+    [self.player beginGeneratingPlaybackNotifications];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.player endGeneratingPlaybackNotifications];
 }
 
 - (void)didReceiveMemoryWarning
@@ -255,8 +264,8 @@
             [self.player skipToPreviousItem];
             [self p_updateLabel];
             //iBeacon
-            [[PTSPeripheralManager sharedManager] startAdvertising:[self p_getNowArtist] withAlubumName:[self p_getNowAlubum]];
-            [self p_updateStatusBar];
+            //[[PTSPeripheralManager sharedManager] startAdvertising:[self p_getNowArtist] withAlubumName:[self p_getNowAlubum]];
+            //[self p_updateStatusBar];
         }
     }];
     
@@ -280,8 +289,8 @@
             [self.player skipToNextItem];
             [self p_updateLabel];
             //iBeacon
-            [[PTSPeripheralManager sharedManager] startAdvertising:[self p_getNowArtist] withAlubumName:[self p_getNowAlubum]];
-            [self p_updateStatusBar];
+            //[[PTSPeripheralManager sharedManager] startAdvertising:[self p_getNowArtist] withAlubumName:[self p_getNowAlubum]];
+            //[self p_updateStatusBar];
         }
     }];
 }
@@ -398,10 +407,24 @@
 /***************************************************/
 #pragma mark - PrivateMethods
 /***************************************************/
+- (void)p_nowPlayingItemChanged:(NSNotification*)ntf {
+    //Label更新
+    [self p_updateLabel];
+    //StatusBar更新
+    [self p_updateStatusBar];
+    //RegisterAPIたたく
+    [[PTSMusicRegisterManager sharedManager] requestRegisterMusicArtist:[self p_getNowArtist] songTitle:[self p_getNowSong] genre:[self p_getNowGenre] WithLat:0 lon:0];
+    //iBeacon
+    [[PTSPeripheralManager sharedManager] startAdvertising:[self p_getNowArtist] withAlubumName:[self p_getNowAlubum]];
+}
 
 - (void)p_updateStatusBar
 {
-    NSDictionary *dict = @{@"SongTitle":_mainLabel.text};
+    NSString *str = [self p_getNowSong];
+    if(str.length < 1){
+        return;
+    }
+    NSDictionary *dict = @{@"SongTitle":str};
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RefreshStatusBar" object:self userInfo:dict];
 }
 
@@ -428,15 +451,36 @@
     }
 }
 
-- (NSString*)p_getNowAlubum {
+- (NSString*)p_getNowSong {
     if(_isPlaying){
         MPMediaItem *song = [self.player nowPlayingItem];
-        return [song valueForProperty: MPMediaItemPropertyArtist];
+        return [song valueForProperty: MPMediaItemPropertyTitle];
     }
     else{
         return @"";
     }
 }
+
+- (NSString*)p_getNowAlubum {
+    if(_isPlaying){
+        MPMediaItem *song = [self.player nowPlayingItem];
+        return [song valueForProperty: MPMediaItemPropertyAlbumTitle];
+    }
+    else{
+        return @"";
+    }
+}
+
+- (NSString*)p_getNowGenre {
+    if(_isPlaying){
+        MPMediaItem *song = [self.player nowPlayingItem];
+        return [song valueForProperty: MPMediaItemPropertyGenre];
+    }
+    else{
+        return @"";
+    }
+}
+
 
 - (void)p_updateLabel {
     if(_isPlaying){
