@@ -8,11 +8,14 @@
 
 #import "PTSRecommendAPIManager.h"
 
+//USERID取得用
+#import "PTSUtilManager.h"
+
 static PTSRecommendAPIManager *_sharedManager = nil;
 // Request URL
 //static NSString *const requestURL = @"http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/wa/wsSearch?term=AKON&country=JP&entity=musicTrack";
 static NSString *const requestURL = @"http://www1415uo.sakura.ne.jp/music/Recommend.php";
-
+//static NSString *const requestURL = @"http://www5250up.sakura.ne.jp:3000/api/onput/recommend?user=D6D4FF19-C28B-43B5-963A-10ACF115A97B";
 @implementation PTSRecommendAPIManager
 + (PTSRecommendAPIManager *)sharedManager {
     static dispatch_once_t  onceToken;

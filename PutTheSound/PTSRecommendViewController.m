@@ -226,5 +226,8 @@
 - (void)p_setScrollsToTopYes
 {
     [self.tableView setScrollsToTop:YES];
+    [[PTSRecommendAPIManager sharedManager] setDelegate:self];
+    [[PTSRecommendAPIManager sharedManager] request];
+
 }
 @end

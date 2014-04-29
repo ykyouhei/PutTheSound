@@ -24,6 +24,7 @@
 		7E2F0FC518D5FA3600595CEA /* PTSTimelineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E2F0FC418D5FA3600595CEA /* PTSTimelineManager.m */; };
 		8F3C012D190F6FB500F0293B /* PTSMusicRegisterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3C012C190F6FB500F0293B /* PTSMusicRegisterManager.m */; };
 		8F3C0130190F776200F0293B /* PTSUtilManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3C012F190F776200F0293B /* PTSUtilManager.m */; };
+		8F3C0132190FD52700F0293B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3C0131190FD52700F0293B /* Social.framework */; };
 		8F6858C118AE216C0056D91D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C018AE216C0056D91D /* Foundation.framework */; };
 		8F6858C318AE216C0056D91D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C218AE216C0056D91D /* CoreGraphics.framework */; };
 		8F6858C518AE216C0056D91D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F6858C418AE216C0056D91D /* UIKit.framework */; };
@@ -95,6 +96,7 @@
 		8F3C012C190F6FB500F0293B /* PTSMusicRegisterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSMusicRegisterManager.m; sourceTree = "<group>"; };
 		8F3C012E190F776200F0293B /* PTSUtilManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSUtilManager.h; sourceTree = "<group>"; };
 		8F3C012F190F776200F0293B /* PTSUtilManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSUtilManager.m; sourceTree = "<group>"; };
+		8F3C0131190FD52700F0293B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		8F6858BD18AE216C0056D91D /* PutTheSound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PutTheSound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F6858C018AE216C0056D91D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8F6858C218AE216C0056D91D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -146,6 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F3C0132190FD52700F0293B /* Social.framework in Frameworks */,
 				8FB34E0618B3AB8B00659BFC /* CoreBluetooth.framework in Frameworks */,
 				41AE376318AF44E7008277CB /* QuartzCore.framework in Frameworks */,
 				410568E518AE800C00CDBFEF /* CoreLocation.framework in Frameworks */,
@@ -258,6 +261,7 @@
 		8F6858BF18AE216C0056D91D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8F3C0131190FD52700F0293B /* Social.framework */,
 				8FEF674318B640B4003C2A23 /* AudioToolbox.framework */,
 				8FB34E0518B3AB8B00659BFC /* CoreBluetooth.framework */,
 				41AE376218AF44E7008277CB /* QuartzCore.framework */,

@@ -22,6 +22,10 @@
 
 //曲情報登録用
 #import "PTSMusicRegisterManager.h"
+//social用
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
+
 
 @interface PTSViewController ()
 @property (weak, nonatomic) IBOutlet iCarousel *carousel;
@@ -245,6 +249,19 @@
 /***************************************************/
 #pragma mark - IBAction
 /***************************************************/
+- (IBAction)didPushPostButton:(id)sender {
+    UIActionSheet *as = [[UIActionSheet alloc] init];
+    as.delegate = self;
+    as.title = @"選択してください";
+    [as addButtonWithTitle:@"LINEに投稿"];
+    [as addButtonWithTitle:@"Twitterに投稿"];
+    [as addButtonWithTitle:@"Facebookに投稿"];
+    [as addButtonWithTitle:@"キャンセル"];
+    as.cancelButtonIndex = 3;
+    [as showInView:self.view];
+}
+
+
 - (IBAction)rightSwipeHandler:(id)sender {
     if (self.playingAlbumIndex != self.carousel.currentItemIndex) {
         return;
@@ -766,6 +783,87 @@
     }
     
     self.selectedLocationName = self.nearestLocations[row][@"Name"];
+}
+
+#pragma mark - UIActionSheet Delegate
+// アクションシートのボタンが押された時に呼ばれるデリゲート例文
+-(void)actionSheet:(UIActionSheet*)actionSheet
+clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    switch (buttonIndex) {
+        case 0:
+            // １番目のボタンが押されたときの処理を記述する
+            [self p_lineAction];
+            break;
+        case 1:
+            // ２番目のボタンが押されたときの処理を記述する
+            [self p_twitterAction];
+            break;
+        case 2:
+            // ３番目のボタンが押されたときの処理を記述する
+            [self p_facebookAction];
+            break;
+        case 3:
+            // ４番目のボタンが押されたときの処理を記述する
+            break;
+    }
+    
+}
+
+#pragma mark - UIActionSheetDeleatePrivateAction
+-(void)p_lineAction
+{
+    NSString *LineUrlString = [[NSString stringWithFormat:@"line://msg/text/%@ / %@ #nowplaying #音ぷっと",[self p_getNowSong],[self p_getNowArtist]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    // URLスキームを使ってLINEを起動
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:LineUrlString]];
+}
+-(void)p_twitterAction
+{
+    SLComposeViewController *twitterPostVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    [twitterPostVC setInitialText:[NSString stringWithFormat:@"%@ / %@ #nowplaying #音ぷっと",[self p_getNowSong],[self p_getNowArtist]]];
+    [twitterPostVC addURL:[NSURL URLWithString:@"http://www1415uo.sakura.ne.jp/jumon.html"]];
+    // 処理終了後に呼び出されるコールバックを指定する
+    [twitterPostVC setCompletionHandler:^(SLComposeViewControllerResult result) {
+        
+        switch (result) {
+            case SLComposeViewControllerResultDone:
+                [self p_showAlertView];
+                break;
+            case SLComposeViewControllerResultCancelled:
+                break;
+        }
+    }];
+    [self presentViewController:twitterPostVC animated:YES completion:nil];
+}
+-(void)p_facebookAction
+{
+    SLComposeViewController *vc = [SLComposeViewController
+                                   composeViewControllerForServiceType:SLServiceTypeFacebook];
+    [vc setInitialText:[NSString stringWithFormat:@"%@ / %@ #nowplaying #音ぷっと",[self p_getNowSong],[self p_getNowArtist]]];
+    [vc addURL:[NSURL URLWithString:@"http://www1415uo.sakura.ne.jp/jumon.html"]];
+    // 処理終了後に呼び出されるコールバックを指定する
+    [vc setCompletionHandler:^(SLComposeViewControllerResult result) {
+        
+        switch (result) {
+            case SLComposeViewControllerResultDone:
+                [self p_showAlertView];
+                break;
+            case SLComposeViewControllerResultCancelled:
+                break;
+        }
+    }];
+    
+    [self presentViewController:vc animated:YES completion:^{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"投稿に成功しました！" message:@"沢山の投稿に期待してます。" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }];
+    
+}
+
+-(void)p_showAlertView
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"投稿に成功しました！" message:@"沢山の投稿に期待してます。" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
 }
 
 @end
