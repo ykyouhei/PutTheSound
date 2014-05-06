@@ -86,16 +86,6 @@
                                              repeats:YES];
     [_timer fire];
     
-    
-//    CAGradientLayer *pageGradient = [CAGradientLayer layer];
-//    pageGradient.frame = self.toolView.bounds;
-//    pageGradient.colors =
-//    [NSArray arrayWithObjects:
-//     (id)[UIColor colorWithWhite:0.0 alpha:0.9].CGColor,
-//     (id)[UIColor colorWithWhite:0.0 alpha:0.6].CGColor,
-//     (id)[UIColor colorWithWhite:0.0 alpha:0.05].CGColor, nil];
-//    [self.toolView.layer insertSublayer:pageGradient atIndex:0];
-    
     self.player = [MPMusicPlayerController iPodMusicPlayer];
     self.player.repeatMode = MPMusicRepeatModeAll;
     
@@ -107,12 +97,28 @@
     //iBeacon
     [[PTSPeripheralManager sharedManager] startAdvertising:@"" withAlubumName:@""];
     [[CentralManager sharedManager] startMonitoring];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    // 曲が変わったときの監視通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_nowPlayingItemChanged:)
                                                  name:MPMusicPlayerControllerNowPlayingItemDidChangeNotification
                                                object:self.player];
+    // 状態が変わったときの監視通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_playStateChanged:)
+                                                 name:MPMusicPlayerControllerPlaybackStateDidChangeNotification
+                                               object:self.player];
     
+    // アプリがフロントに戻ってきた時の監視通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(p_WillEnterForeground:)
+                                                 name:@"WillEnterForeground"
+                                               object:nil];
+
     [self.player beginGeneratingPlaybackNotifications];
+    
+    [self p_WillEnterForeground:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -145,7 +151,8 @@
     view.mainLabel.text = self.dataModel.sectionPlayList[index];
     MPMediaItemArtwork *artwork = self.dataModel.playListSongs[self.dataModel.sectionPlayList[index]][0][@"ARTWORK"];
     view.artworkImageView.image = [artwork imageWithSize:CGSizeMake(220.0f, 220.0f)];
-    view.stateImageView.image = self.playingAlbumIndex == index ? [UIImage imageNamed:@"stop"] : [UIImage imageNamed:@"play"];
+    
+    view.stateImageView.image = (self.playingAlbumIndex == index && self.isPlaying)? [UIImage imageNamed:@"stop"] : [UIImage imageNamed:@"play"];
     
     return view;
 }
@@ -430,9 +437,45 @@
     //StatusBar更新
     [self p_updateStatusBar];
     //RegisterAPIたたく
-    [[PTSMusicRegisterManager sharedManager] requestRegisterMusicArtist:[self p_getNowArtist] songTitle:[self p_getNowSong] genre:[self p_getNowGenre] WithLat:0 lon:0];
+    // TODO:latlon処理追加
+    [[PTSMusicRegisterManager sharedManager] requestRegisterMusicArtist:[self p_getNowArtist] songTitle:[self p_getNowSong] albumTitle:[self p_getNowAlubum] genre:[self p_getNowGenre] WithLat:0 lon:0];
     //iBeacon
     [[PTSPeripheralManager sharedManager] startAdvertising:[self p_getNowArtist] withAlubumName:[self p_getNowAlubum]];
+}
+
+- (void)p_WillEnterForeground:(NSNotification*)ntf{
+    // iPod再生中にアプリ立ち上げた時に再生中のフラグをたてる
+    if(_player.playbackState == MPMoviePlaybackStateStopped ||
+       _player.playbackState == MPMoviePlaybackStatePaused){
+        self.isPlaying = NO;
+    }
+    else
+    {
+        self.isPlaying = YES;
+    }
+    
+    // 再生中の曲にアートワークを合わせるため、データをソートし更新
+    //self.dataModel = [[PTSMusicDataModel sharedManager] sortDataWithAlbumName:[_player.nowPlayingItem valueForProperty:MPMediaItemPropertyAlbumTitle]];
+
+    // backgroundから復帰した場合にデータの更新する
+    self.dataModel = [[PTSMusicDataModel sharedManager] reloadData];
+    [self.carousel reloadData];
+    
+    // iPodで再生中だった場合に再生ボタンの更新を行う
+    NSInteger count = 0;
+    for(NSString *title in self.dataModel.sectionPlayList){
+        if([title isEqualToString:[_player.nowPlayingItem valueForProperty:MPMediaItemPropertyAlbumTitle]]){
+            self.playingAlbumIndex = count;
+        }
+        count++;
+    }
+    // UIの更新
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        [self.carousel setCurrentItemIndex:_playingAlbumIndex];
+    });
+}
+
+- (void)p_playStateChanged:(NSNotification*)ntf {
 }
 
 - (void)p_updateStatusBar

@@ -37,6 +37,10 @@ NSString *const openRightNotification = @"openRight";
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     self.mainView.layer.shadowOpacity = 0.2; // 濃さを指定
     self.mainView.layer.shadowOffset = CGSizeMake(0.0, 0.0); // 影までの距離を指定
     self.isHiddenStatusBar = YES;

@@ -19,5 +19,6 @@
 @property (nonatomic) NSDictionary *selectedSong;
 
 + (PTSMusicDataModel *)sharedManager;
-
+- (PTSMusicDataModel *)reloadData;
+- (PTSMusicDataModel *)sortDataWithAlbumName:(NSString*)albumName;
 @end

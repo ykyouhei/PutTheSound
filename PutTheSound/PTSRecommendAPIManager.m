@@ -14,8 +14,9 @@
 static PTSRecommendAPIManager *_sharedManager = nil;
 // Request URL
 //static NSString *const requestURL = @"http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/wa/wsSearch?term=AKON&country=JP&entity=musicTrack";
-static NSString *const requestURL = @"http://www1415uo.sakura.ne.jp/music/Recommend.php";
-//static NSString *const requestURL = @"http://www5250up.sakura.ne.jp:3000/api/onput/recommend?user=D6D4FF19-C28B-43B5-963A-10ACF115A97B";
+//static NSString *const requestURL = @"http://www1415uo.sakura.ne.jp/music/Recommend.php";
+//static NSString *const requestURL = @"file://localhost/Users/Toshiki/Desktop/stub.json";
+static NSString *const requestURL = @"http://www5250up.sakura.ne.jp:3000/api/onput/recommend?user=";
 @implementation PTSRecommendAPIManager
 + (PTSRecommendAPIManager *)sharedManager {
     static dispatch_once_t  onceToken;
@@ -34,7 +35,7 @@ static NSString *const requestURL = @"http://www1415uo.sakura.ne.jp/music/Recomm
 }
 
 - (void)request {
-    NSURL *url = [NSURL URLWithString:requestURL];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",requestURL,[PTSUtilManager getUserID]]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new]
                            completionHandler: ^(NSURLResponse *response, NSData *data, NSError *error){
@@ -53,7 +54,8 @@ static NSString *const requestURL = @"http://www1415uo.sakura.ne.jp/music/Recomm
                                    }
                                     */
                                    if([self.delegate respondsToSelector:@selector(didFinishLoardWithObject:)]){
-                                       [self.delegate didFinishLoardWithObject:jsonObject[@"results"]];
+                                       [self.delegate didFinishLoardWithObject:jsonObject[@"musics"]];
+                                       //[self.delegate didFinishLoardWithObject:jsonObject[@"results"]];
                                    }
                                }
                                

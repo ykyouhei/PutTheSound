@@ -175,12 +175,32 @@
                                     <constraint firstAttribute="height" constant="60" id="mCt-Ef-tZc"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVw-IQ-Ykt">
+                                <rect key="frame" x="0.0" y="148" width="40" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="rightSwipeHandler:" destination="u3I-pd-yfk" eventType="touchUpInside" id="fTT-pf-iPk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dP9-ib-Pf5">
+                                <rect key="frame" x="280" y="148" width="40" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="leftSwipeHander:" destination="u3I-pd-yfk" eventType="touchUpInside" id="xsT-Bi-3JW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tGX-NE-DRQ" firstAttribute="leading" secondItem="vSv-0J-JYZ" secondAttribute="leading" id="19r-N2-FWV"/>
                             <constraint firstAttribute="trailing" secondItem="L5r-Ng-UW3" secondAttribute="trailing" id="GUl-MD-bYw"/>
-                            <constraint firstItem="L5r-Ng-UW3" firstAttribute="top" secondItem="Niu-dR-0nX" secondAttribute="bottom" id="I85-To-p6F"/>
+                            <constraint firstItem="L5r-Ng-UW3" firstAttribute="top" secondItem="Niu-dR-0nX" secondAttribute="top" id="I85-To-p6F"/>
                             <constraint firstAttribute="trailing" secondItem="tGX-NE-DRQ" secondAttribute="trailing" id="SVn-L3-ChE"/>
                             <constraint firstItem="xgP-gf-Qxc" firstAttribute="top" secondItem="tGX-NE-DRQ" secondAttribute="bottom" id="XWa-tQ-Sf9"/>
                             <constraint firstItem="tGX-NE-DRQ" firstAttribute="top" relation="lessThanOrEqual" secondItem="L5r-Ng-UW3" secondAttribute="bottom" constant="236" id="kQp-Mm-aeL"/>

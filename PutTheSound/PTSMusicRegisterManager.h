@@ -11,5 +11,5 @@
 
 @interface PTSMusicRegisterManager : NSObject
 + (PTSMusicRegisterManager *)sharedManager;
-- (void)requestRegisterMusicArtist:(NSString*)artist songTitle:(NSString*)songTitle genre:(NSString*)genre WithLat:(CLLocationDegrees)lat lon:(CLLocationDegrees)lon;
+- (void)requestRegisterMusicArtist:(NSString*)artist songTitle:(NSString*)songTitle albumTitle:(NSString*)albumTitle genre:(NSString*)genre WithLat:(CLLocationDegrees)lat lon:(CLLocationDegrees)lon;
 @end

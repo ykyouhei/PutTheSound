@@ -120,17 +120,17 @@
 {
     static NSString *CellIdentifier = @"RecommendCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    NSLog(@"%@",_recommendItems[indexPath.row]);
     // Configure the cell...
     UILabel *alubumLabel = (UILabel*)[cell viewWithTag:500];
-    alubumLabel.text = _recommendItems[indexPath.row][@"collectionName"];
+    alubumLabel.text = _recommendItems[indexPath.row][@"collection"];
     
     UILabel *mainLabel = (UILabel*)[cell viewWithTag:200];
-    mainLabel.text = _recommendItems[indexPath.row][@"trackName"];
+    mainLabel.text = _recommendItems[indexPath.row][@"track"];
     
     SCOUtilImageView *imageView = (SCOUtilImageView*)[cell viewWithTag:100];
     imageView.delegate = self;
-    imageView.songUrl = _recommendItems[indexPath.row][@"previewUrl"];
+    imageView.songUrl = _recommendItems[indexPath.row][@"previewurl"];
     
     //DLButton
     UIButton *downLoadButton = (UIButton*)[cell viewWithTag:900];
@@ -138,7 +138,7 @@
     
     // 画像取得（UIImage+AFNetworking）
     __weak SCOUtilImageView *weakImageView = imageView;
-    NSString *urlString = [_recommendItems[indexPath.row][@"artworkUrl100"] stringByReplacingOccurrencesOfString:@"100x100" withString:@"200x200"];
+    NSString *urlString = [_recommendItems[indexPath.row][@"artwork"] stringByReplacingOccurrencesOfString:@"100x100" withString:@"400x400"];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [imageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {

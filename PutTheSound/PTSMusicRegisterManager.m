@@ -16,6 +16,14 @@ static NSString *const baseRegisterUrl = @"http://www5250up.sakura.ne.jp:3000/ap
 /*
  curl http://www5250up.sakura.ne.jp:3000/api/onput/music_history -X POST -d "user=hoge" -d "title=あいうえお" -d "artist=かきくけこ" -d "genre=anime"
  */
+/*
+ ・user（必須）　UUID
+ ・track（必須）音楽のタイトル
+ ・artist（任意）歌手
+ ・collection（任意）アルバム名
+ ・lat（任意）
+ ・lon（任意）
+ */
 @implementation PTSMusicRegisterManager
 
 + (PTSMusicRegisterManager *)sharedManager
@@ -42,7 +50,11 @@ static NSString *const baseRegisterUrl = @"http://www5250up.sakura.ne.jp:3000/ap
 }
 
 // TODO: 位置情報付与
-- (void)requestRegisterMusicArtist:(NSString*)artistName songTitle:(NSString*)songTitle genre:(NSString*)genre WithLat:(CLLocationDegrees)lat lon:(CLLocationDegrees)lon
+- (void)requestRegisterMusicArtist:(NSString*)artistName
+                         songTitle:(NSString*)songTitle
+                         albumTitle:(NSString*)albumTitle
+                             genre:(NSString*)genre
+                           WithLat:(CLLocationDegrees)lat lon:(CLLocationDegrees)lon
 {
     // 必要情報がなかったら登録処理を行わない
     if(artistName.length < 1 ||
@@ -57,7 +69,7 @@ static NSString *const baseRegisterUrl = @"http://www5250up.sakura.ne.jp:3000/ap
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestUrl];
     //パラメータを作成
     NSString *userid = [PTSUtilManager getUserID];
-    NSString *body = [NSString stringWithFormat:@"user=%@&title=%@&artist=%@&genre=%@", userid, [self p_uriEncodeForString:songTitle], [self p_uriEncodeForString:artistName], [self p_uriEncodeForString:genre]];
+    NSString *body = [NSString stringWithFormat:@"user=%@&track=%@&artist=%@&album=%@&genre=%@", userid, [self p_uriEncodeForString:songTitle], [self p_uriEncodeForString:artistName], [self p_uriEncodeForString:albumTitle],[self p_uriEncodeForString:genre]];
     
     //NSLog(@"request body:%@",body);
     
