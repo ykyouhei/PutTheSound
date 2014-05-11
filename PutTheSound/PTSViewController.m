@@ -365,19 +365,19 @@
     }
 }
 
-- (IBAction)didPushGetButton:(id)sender {
-    [self p_openControllViewWithContent:_getDetailView];
-}
-
-- (IBAction)didPushPutButton:(id)sender {
-    if (!self.isPlaying) {
-        OLGhostAlertView *ghastly = [[OLGhostAlertView alloc] initWithTitle:nil
-                                                                    message:@"曲が選択されていません"];
-        [ghastly show];
-        return;
-    }
-    [self p_openControllViewWithContent:_putDetailView];
-}
+//- (IBAction)didPushGetButton:(id)sender {
+//    [self p_openControllViewWithContent:_getDetailView];
+//}
+//
+//- (IBAction)didPushPutButton:(id)sender {
+//    if (!self.isPlaying) {
+//        OLGhostAlertView *ghastly = [[OLGhostAlertView alloc] initWithTitle:nil
+//                                                                    message:@"曲が選択されていません"];
+//        [ghastly show];
+//        return;
+//    }
+//    [self p_openControllViewWithContent:_putDetailView];
+//}
 
 - (IBAction)musicControlHandler:(UIPanGestureRecognizer *)sender {
     switch (sender.state) {
