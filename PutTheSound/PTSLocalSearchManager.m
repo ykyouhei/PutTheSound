@@ -106,8 +106,12 @@ static NSString *const kGetLocationsURLTemplate = @"http://search.olp.yahooapis.
     }
     
     CLLocation* location = [locations lastObject];
-    [self requestLocationsWithLat:location.coordinate.latitude
-                             lon:location.coordinate.longitude];
+//    [self requestLocationsWithLat:location.coordinate.latitude
+//                             lon:location.coordinate.longitude];
+    
+    NSArray *result = @[@(location.coordinate.latitude), @(location.coordinate.longitude)];
+    _requestLocationsHandler(result, nil);
+    _requestLocationsHandler = nil;
     
     [_locationManager stopUpdatingLocation];
 }

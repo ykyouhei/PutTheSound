@@ -498,7 +498,7 @@
 				ORGANIZATIONNAME = "Toshiki Chiba";
 				TargetAttributes = {
 					8F6858BC18AE216C0056D91D = {
-						DevelopmentTeam = AVWWV46Y77;
+						DevelopmentTeam = 6EC83W22VX;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -762,13 +762,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = PutTheSound/PutTheSound.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PutTheSound/PutTheSound-Prefix.pch";
 				INFOPLIST_FILE = "PutTheSound/PutTheSound-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "134354FD-226B-40DC-9FFC-DD80F0EA7E7D";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -69,9 +69,9 @@ static NSString *const baseRegisterUrl = @"http://www5250up.sakura.ne.jp:3000/ap
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestUrl];
     //パラメータを作成
     NSString *userid = [PTSUtilManager getUserID];
-    NSString *body = [NSString stringWithFormat:@"user=%@&track=%@&artist=%@&album=%@&genre=%@", userid, [self p_uriEncodeForString:songTitle], [self p_uriEncodeForString:artistName], [self p_uriEncodeForString:albumTitle],[self p_uriEncodeForString:genre]];
+    NSString *body = [NSString stringWithFormat:@"user=%@&track=%@&artist=%@&album=%@&genre=%@&lat=%f&lon=%f", userid, [self p_uriEncodeForString:songTitle], [self p_uriEncodeForString:artistName], [self p_uriEncodeForString:albumTitle],[self p_uriEncodeForString:genre], lat, lon];
     
-    //NSLog(@"request body:%@",body);
+    NSLog(@"request body:%@",body);
     
     [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
     [request setHTTPMethod:@"POST"];

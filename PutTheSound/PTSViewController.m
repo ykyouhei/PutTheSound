@@ -457,9 +457,18 @@
     [self p_updateLabel];
     //StatusBar更新
     [self p_updateStatusBar];
+    
     //RegisterAPIたたく
-    // TODO:latlon処理追加
-    [[PTSMusicRegisterManager sharedManager] requestRegisterMusicArtist:[self p_getNowArtist] songTitle:[self p_getNowSong] albumTitle:[self p_getNowAlubum] genre:[self p_getNowGenre] WithLat:0 lon:0];
+    [[PTSLocalSearchManager sharedManager] requestNearestLocations:^(NSArray *locations, NSError *error) {
+        double lat = 0;
+        double lon = 0;
+        if (!error) {
+            lat = [locations[0] doubleValue];
+            lon = [locations[1] doubleValue];
+        }
+        [[PTSMusicRegisterManager sharedManager] requestRegisterMusicArtist:[self p_getNowArtist] songTitle:[self p_getNowSong] albumTitle:[self p_getNowAlubum] genre:[self p_getNowGenre] WithLat:lat lon:lon];
+    }];
+    
     //iBeacon
     [[PTSPeripheralManager sharedManager] startAdvertising:[self p_getNowArtist] withAlubumName:[self p_getNowAlubum]];
 }
